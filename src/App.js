@@ -5,6 +5,7 @@ import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import Auth from  './auth/Auth';
 import Home from  './components/Home';
+import { BrowserRouter as Router, } from 'react-router-dom';
 
 class App extends React.Component {
 
@@ -39,11 +40,11 @@ userIsLoggedIn() {  // method checks for a session token
   console.log("This is the sessionToken", this.state.sessionToken);
   //if (this.state.sessionToken === localStorage.getItem('token')) { 
   if (this.state.sessionToken === null) {
-    console.log("The session token = null.  We go Home.")
-    return <Home token={this.state.sessionToken} />
+    console.log("The session token = null.  We go Auth.");
+    return <Auth token={this.state.sessionToken} />
   } else {
-    console.log("The session token != null.  We go Auth.")
-    return <Auth token={this.state.sessionToken} /> 
+    console.log("The session token != null.  We go Home.")
+    return <Home token={this.state.sessionToken} /> 
   };
 };
 
@@ -54,7 +55,9 @@ userIsLoggedIn() {  // method checks for a session token
       <div className="App">
         <TopNavBar token={this.state.sessionToken} />
         <h3>Welcome to Immrama</h3>
-        {this.userIsLoggedIn()}
+        <Router>
+          {this.userIsLoggedIn()}
+        </Router>
 
         <Footer token={this.state.sessionToken} />
       </div>
