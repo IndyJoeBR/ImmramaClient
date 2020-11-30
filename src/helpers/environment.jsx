@@ -9,3 +9,9 @@ switch (window.location.hostname) {
 }
 
 export default APIURL;
+
+
+// Deployed to Heroku on 11/30/2020
+//     https://immrama.herokuapp.com/
+
+// git: https://git.heroku.com/immrama.git
