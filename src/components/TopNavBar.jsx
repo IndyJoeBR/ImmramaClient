@@ -1,17 +1,23 @@
 import React from 'react';
 import {   Collapse,
+  Button,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink,
+
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   NavbarText } from 'reactstrap';
-  import About from '../sections/about';
+import About from '../sections/about';
+import '../styles/TopNavBar.css'
+import { Link } from "react-router-dom";
+import navbarLogo from '../styles/assets/ImmramaLogo.png';
+import navbarTiling from '../styles/assets/tile01.jpg';
 
 
 
@@ -27,41 +33,59 @@ class TopNavBar extends React.Component {
 
 
   toggleNavbar () {
-    if(this.navbarIsOpen === true) {
+    this.setState( {navbarIsOpen: (!this.state.navbarIsOpen)} )
+
+/*    if(this.navbarIsOpen === true) {
       console.log("closing navbar");
       this.setState( {navbarIsOpen: false} );
     } else {
       this.setState( {navbarIsOpen: true} );
       console.log("opening navbar");
     }
+*/
   };
 
 
-  render () {
+  immramaLogout() {
+    localStorage.clear();
+
+  };
+
+
+  render (props) {
 
     return (
       <div>
-        <Navbar color="light" light expand="md" className="navbarBackground">
-        <NavbarBrand href="/">Immrama</NavbarBrand>
-        <NavbarToggler onClick={this.toggleNavbar} />
-        <Collapse isOpen={this.state.navbarIsOpen} navbar>
+        <Navbar light expand="md" className="navbarBackground" >
+
+        <NavbarBrand href="/">
+          <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
+          Immrama</NavbarBrand>
+        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+        <Collapse isOpen={!this.state.navbarIsOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/">Journeys</NavLink>
+          <NavItem>
+              <Button color="dark">Home</Button>{' '}
             </NavItem>
             <NavItem>
-              <NavLink href="/">My Journeys</NavLink>
+              <Button color="primary">Journeys</Button>{' '}
             </NavItem>
             <NavItem>
-              <NavLink href="/">Contact Us</NavLink>
+              <Button color="primary">My Journeys</Button>{' '}
             </NavItem>
             <NavItem>
-              <NavLink href="/">About</NavLink>
+              <Button color="info">Contact Us</Button>{' '}
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Account
-              </DropdownToggle>
+            <NavItem>
+              <Button color="info">About</Button>{' '}
+            </NavItem>
+          </Nav>
+          <UncontrolledDropdown inNavbar>
+              <Button color="success" size="sm" classname="btnAccount">
+                <DropdownToggle nav caret>
+                  Account
+                </DropdownToggle>
+              </Button>
               <DropdownMenu right>
                 <DropdownItem>
                   Logout
@@ -70,9 +94,7 @@ class TopNavBar extends React.Component {
                   Change Password
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          </UncontrolledDropdown>
         </Collapse>
         </Navbar>
       </div>

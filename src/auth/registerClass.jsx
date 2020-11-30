@@ -49,15 +49,9 @@ class RegisterClass extends React.Component {
         event.preventDefault();
 
         let username = this.state.username;
-        console.log("Username: ", username);
         let userEmail = this.state.userEmail;
-        console.log("User email: ", username);
         let password = this.state.password;
-        console.log("Password: ", username);
         let passwordConfirm = this.state.passwordConfirm;
-        console.log("Password Confirm: ", username);
-
-        console.log("Past assignments for fetch.")
 
         if (username && password && userEmail) {
             console.log("Has username, user email and password");

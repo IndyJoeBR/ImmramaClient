@@ -1,7 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-
-
+import Arrival from './Arrival';
 
 class Home extends React.Component {
 
@@ -9,8 +7,11 @@ class Home extends React.Component {
   render () {
 
     return (
-      <div>
-          This is the home page
+      <div className="App">
+
+        <h3>Welcome to Immrama</h3>
+        <Arrival />
+
       </div>
 
     );  //  end of return

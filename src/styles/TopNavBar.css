@@ -1,5 +1,23 @@
 .navbarBackground {
   text-align: center;
-  background-image: url("../src/styles/assets/tile02.jpg");
-  background-repeat: repeat;
+}
+
+.navbarLogo {
+  width: 30px;
+  height: auto;
+}
+
+.btnAccount {
+  text-decoration: none;
+  color: black
+}
+
+.btnAccount:visited {
+  text-decoration: none;
+  color: black
+}
+
+.btnAccount:link {
+  text-decoration: none;
+  color: black
 }

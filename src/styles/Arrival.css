@@ -1,0 +1,7 @@
+.arrivalView {
+  text-align: center;
+  background-image: url("../src/styles/assets/arrivalNavagatio.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: auto
+}
