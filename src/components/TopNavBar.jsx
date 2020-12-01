@@ -154,10 +154,10 @@ class TopNavBar extends React.Component {
             <Home />
           </Route>
           <Route exact path="/ViewJourneys">
-            <ViewJourneys journeyEndpoint={} />
+            <ViewJourneys journeyEndpoint={"/getAllJourneys"} />
           </Route>
           <Route exact path="/ViewJourneys">
-            <ViewJourneys journeyEndpoint={} />
+            <ViewJourneys journeyEndpoint={"/getAllUsersJourneys/"+this.props.username} />
           </Route>
           <Route exact path="../sections/about">
             <About />
