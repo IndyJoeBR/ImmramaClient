@@ -21,21 +21,6 @@ class LoginClass extends React.Component {
   };    //  end of constructor
 
 
-  // updateUserState (adminStatus, username, token) {
-  //   this.setState( {
-  //       userIsAdmin: adminStatus,
-  //       username: username,
-  //       sessionToken: token
-  //   });
-  //   // console.log("         The updated state variables are: ")
-  //   // console.log("Username:",this.state.username);
-  //   // console.log("SessionToken:",this.state.sessionToken);
-  //   // console.log("'token' is localstorage is:", localStorage.getItem('token') );
-  //   // console.log("userIsAdmin:",this.state.userIsAdmin);
-  //   // console.log("User is logged in!");
-  // };
-
-
   loginSubmit (event) {
     event.preventDefault();
 
@@ -63,7 +48,7 @@ class LoginClass extends React.Component {
         localStorage.setItem('token', data.sessionToken); // puts in local storage for App and Authorization Header
     })
     .catch( (error) => console.log(error) );
-  };
+  };  //  end of loginSubmit
 
 
   render () {
@@ -110,3 +95,20 @@ class LoginClass extends React.Component {
 };  //  end of LoginClass
 
 export default LoginClass;
+
+
+
+//  *****************   DELETE WHEN EVERYTHING WORKS   ***************
+  // updateUserState (adminStatus, username, token) {
+  //   this.setState( {
+  //       userIsAdmin: adminStatus,
+  //       username: username,
+  //       sessionToken: token
+  //   });
+  //   // console.log("         The updated state variables are: ")
+  //   // console.log("Username:",this.state.username);
+  //   // console.log("SessionToken:",this.state.sessionToken);
+  //   // console.log("'token' is localstorage is:", localStorage.getItem('token') );
+  //   // console.log("userIsAdmin:",this.state.userIsAdmin);
+  //   // console.log("User is logged in!");
+  // };

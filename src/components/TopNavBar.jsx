@@ -105,13 +105,13 @@ class TopNavBar extends React.Component {
                 <Button color="dark">Home</Button>{' '}
               </NavItem>
               <NavItem>
-                <Link to="/Home">About</Link>
+                <Link to="/Home">Home</Link>
               </NavItem>
               <NavItem>
                 <Button color="primary">Journeys</Button>{' '}
               </NavItem>
               <NavItem>
-                <Link to="/ViewJourneys">About</Link>
+                <Link to="/ViewJourneys">Journeys</Link>
               </NavItem>
               <NavItem>
                 <Button color="primary">My Journeys</Button>{' '}

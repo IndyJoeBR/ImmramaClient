@@ -33,6 +33,7 @@ fetchJourneys(e) {
     return (
       <div>
           Here you can view the journeys
+          {this.props.journeyEndpoint}
       </div>
 
     );  //  end of return
