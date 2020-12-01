@@ -48,10 +48,8 @@ class TopNavBar extends React.Component {
   immramaLogout() {
     console.log("Starting logout");
     localStorage.clear();
-    this.props.setState({
-      token: '',
-      userIsLoggedIn: false
-    });
+    this.props.setSessionToken(null);
+    this.props.setUserIsLoggedIn(false);
     console.log("User is logged out.")
   };
 
