@@ -76,9 +76,9 @@ class TopNavBar extends React.Component {
               <Button color="primary">My Journeys</Button>{' '}
             </NavItem>
             <NavItem>
-              <Link to="../sections/about">
-                <NavLink className="NavLink" to="../sections/about">Contact Us</NavLink>
-              </Link>
+
+                <Button color="primary">My Journeys</Button>{' '}
+
             </NavItem>
             <NavItem>
               <Button color="info">About</Button>{' '}
