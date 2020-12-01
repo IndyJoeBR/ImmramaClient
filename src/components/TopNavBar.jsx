@@ -91,8 +91,8 @@ class TopNavBar extends React.Component {
                 </DropdownToggle>
               </Button>
               <DropdownMenu right>
-                <DropdownItem onClick={/*this.immramaLogout()*/}>
-                  <Button color="danger" size="sm" onClick={this.logout}>Logout</Button>
+                <DropdownItem>
+                  <Button color="danger" size="sm" >Logout</Button>
                 </DropdownItem>
                 <DropdownItem>
                   Change Password
