@@ -24,8 +24,7 @@ class TopNavBar extends React.Component {
   constructor (props) {
     super(props)
     this.toggleNavbar = this.toggleNavbar.bind(this);
-  //  this.immramaLogout = this.immramaLogout.bind(this);
-
+    this.immramaLogout = this.immramaLogout.bind(this);
     this.state = { navbarIsOpen: true };
 
   };  //  end of constructor
@@ -46,15 +45,35 @@ class TopNavBar extends React.Component {
   };
 
 
-  // immramaLogout() {
-  //   localStorage.clear();
-  //   // TODO -- clear the sessionToken from props (get it there first)
-  //   console.log("User is logged out.")
-  // };
+  immramaLogout() {
+    localStorage.clear();
+    this.props.setState({
+      token: '',
+      userIsLoggedIn: false
+    })
+    // TODO -- clear the sessionToken from props (get it there first)
+    console.log("User is logged out.")
+  };
 
 
 //  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
+//    or
+//  
+// Display component section
+/*
+  <Router>
+  anything you want to show up (all your components and all)
 
+    <Switch>
+      <Route>
+        <component props={props} />
+      </Route>
+      <Route>
+        <component props={props} />
+      </Route>
+    <Switch>
+  </Router>
+*/
 
   render () {
 
@@ -97,7 +116,7 @@ class TopNavBar extends React.Component {
                 </Button>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <Button color="danger" size="sm">Logout</Button>
+                    <Button color="danger" size="sm" type="submit" onSubmit={this.immramaLogout} >Logout</Button>
                   </DropdownItem>
                   <DropdownItem>
                     <Button color="warning" size="sm">Change Password</Button>

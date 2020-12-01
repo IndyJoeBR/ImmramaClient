@@ -54,9 +54,11 @@ componentDidMount() {
 
     return (
       <div className="App">
-        <TopNavBar token={this.state.sessionToken} userIsLoggedIn={this.state.userIsLoggedIn} />
+        <Router>
+          <TopNavBar token={this.state.sessionToken} userIsLoggedIn={this.state.userIsLoggedIn} />
 
-        <Footer token={this.state.sessionToken} />
+          <Footer token={this.state.sessionToken} />
+        </Router>
       </div>
 
     );  //  end of return
