@@ -47,11 +47,11 @@ class TopNavBar extends React.Component {
 
 
 
-  immramaLogout() {
-    localStorage.clear();
-    // TODO -- clear the sessionToken from props (get it there first)
-    console.log("User is logged out.")
-  };
+  // immramaLogout() {
+  //   localStorage.clear();
+  //   // TODO -- clear the sessionToken from props (get it there first)
+  //   console.log("User is logged out.")
+  // };
 
 
   render (props) {
@@ -76,7 +76,9 @@ class TopNavBar extends React.Component {
               <Button color="primary">My Journeys</Button>{' '}
             </NavItem>
             <NavItem>
-              <Button color="info">Contact Us</Button>{' '}
+              <Link to="../sections/about">
+                <NavLink className="NavLink" to="../sections/about">Contact Us</NavLink>
+              </Link>
             </NavItem>
             <NavItem>
               <Button color="info">About</Button>{' '}
