@@ -27,23 +27,20 @@ class LoginClass extends React.Component {
         username: username,
         sessionToken: token
     });
-    console.log("The updated state variables are: ")
-    console.log("Username:",this.state.username);
-    console.log("SessionToken:",this.state.sessionToken);
-    console.log("'token' is localstorage is:", localStorage.getItem('token') );
-    console.log("userIsAdmin:",this.state.userIsAdmin);
-    console.log("User is logged in!");
+    // console.log("         The updated state variables are: ")
+    // console.log("Username:",this.state.username);
+    // console.log("SessionToken:",this.state.sessionToken);
+    // console.log("'token' is localstorage is:", localStorage.getItem('token') );
+    // console.log("userIsAdmin:",this.state.userIsAdmin);
+    // console.log("User is logged in!");
   };
 
 
   loginSubmit (event) {
     event.preventDefault();
-
+    
     let username = this.state.username;
-    console.log("Username: ", username);;
     let password = this.state.password;
-    console.log("Password: ", username);
-
 
     fetch(`${APIURL}/user/login`, {
         method: 'POST',
@@ -56,7 +53,7 @@ class LoginClass extends React.Component {
     .then( (response) => response.json() )
     .then( (data) => { 
         console.log(data);
-        console.log("Data above returned!");
+        console.log("Login endpoint complete!");
         this.updateUserState(data.user.userAdmin, data.user.username, data.sessionToken);
         localStorage.setItem('token', data.sessionToken); // puts in local storage for App and Authorization Header
     })
@@ -68,7 +65,7 @@ class LoginClass extends React.Component {
     return (
     
       <div className='authForm' id='loginForm'>
-            <Form className="mainLogin" onSubmit={this.loginSubmit}>
+            <Form className="mainLogin" onSubmit={this.loginSubmit} type="submit">
                 <FormGroup>
                   <Label className="Label" htmlFor="loginUsername"></Label>
                   <Input  className="Input"
