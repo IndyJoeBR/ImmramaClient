@@ -62,7 +62,6 @@ class LoginClass extends React.Component {
 };
 
 
-
   render () {
     return (
     
