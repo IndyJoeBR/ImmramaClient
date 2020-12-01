@@ -12,7 +12,6 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     
-//    this.userIsLoggedIn = this.userIsLoggedIn.bind(this);
     this.setUserIsLoggedIn = this.setUserIsLoggedIn.bind(this);
     this.setSessionToken = this.setSessionToken.bind(this);
 
@@ -56,7 +55,6 @@ class App extends React.Component {
                       userIsLoggedIn={this.state.userIsLoggedIn} setUserIsLoggedIn={this.setUserIsLoggedIn}
                       setSessionToken={this.setSessionToken}
           />
-
           <Footer token={this.state.sessionToken} />
         </Router>
       </div>
@@ -69,6 +67,9 @@ class App extends React.Component {
 };  //  end of App class
 
 export default App;
+
+
+
 
 
 //   ***** DELETE THIS ONCE ALL IS WORKING *****

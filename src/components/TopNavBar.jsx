@@ -25,6 +25,8 @@ class TopNavBar extends React.Component {
     super(props)
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.immramaLogout = this.immramaLogout.bind(this);
+    this.changeUserPassword = this.changeUserPassword.bind(this);
+
     this.state = { navbarIsOpen: true };
 
   };  //  end of constructor
@@ -55,6 +57,10 @@ class TopNavBar extends React.Component {
     console.log("User is logged out.")
   };
 
+  changeUserPassword() {
+    console.log("Change password goes here - NO CODE - NOT FUNCTIONAL");
+    // TODO  ---------  insert change password modal  ---------
+  };
 
 //  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
 //    or
@@ -119,7 +125,7 @@ class TopNavBar extends React.Component {
                     <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
                   </DropdownItem>
                   <DropdownItem>
-                    <Button color="warning" size="sm">Change Password</Button>
+                    <Button color="warning" size="sm" onClick={this.changeUserPassword} >Change Password</Button>
                   </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
