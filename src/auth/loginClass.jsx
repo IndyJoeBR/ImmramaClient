@@ -29,6 +29,7 @@ class LoginClass extends React.Component {
     console.log("The updated state variables are: ")
     console.log("Username:",this.state.username);
     console.log("SessionToken:",this.state.sessionToken);
+    console.log("'token' is localstorage is:", localStorage.getItem('token') );
     console.log("userIsAdmin:",this.state.userIsAdmin);
     console.log("User is logged in!");
   };
@@ -54,7 +55,7 @@ class LoginClass extends React.Component {
     .then( (response) => response.json() )
     .then( (data) => { 
         console.log(data);
-        console.log("Data returned");
+        console.log("Data above returned!");
         this.updateUserState(data.user.userAdmin, data.user.username, data.sessionToken);
         localStorage.setItem('token', data.sessionToken); // puts in local storage for App and Authorization Header
     })
