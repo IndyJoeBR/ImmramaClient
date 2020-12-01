@@ -14,7 +14,7 @@ import {   Collapse,
   NavbarText } from 'reactstrap';
 import About from '../sections/about';
 import '../styles/TopNavBar.css'
-import { Link } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
 import Auth from  '../auth/Auth';
 
@@ -140,9 +140,6 @@ class TopNavBar extends React.Component {
         <Switch>
           <Route exact path="../sections/about">
             <About />
-          </Route>
-          <Route>
-            <component props={props} />
           </Route>
         </Switch>
 
