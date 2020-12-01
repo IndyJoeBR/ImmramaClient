@@ -50,6 +50,8 @@ class TopNavBar extends React.Component {
     localStorage.clear();
     this.props.setSessionToken(null);
     this.props.setUserIsLoggedIn(false);
+    console.log("The state of sessionToken is now:", this.props.token);
+    console.log("The state of userIsLoggedIn has been set to:", this.props.userIsLoggedIn);
     console.log("User is logged out.")
   };
 

@@ -39,13 +39,11 @@ class App extends React.Component {
   setSessionToken(newSessionTokenValue) {
     console.log("Changing the session token.");
     this.setState( {sessionToken: newSessionTokenValue} );
-    console.log("The state of sessionToken is now:", this.sessionToken);
   };  // method to be passed into props for use in TopNavBar for Logout
 
   setUserIsLoggedIn(newLoggedInState) {
     console.log("Changing userIsLoggedIn.");
-    this.setState( {userIsLoggedIn: newLoggedInState} )
-    console.log("The state of userIsLoggedIn has been set to:", this.userIsLoggedIn)
+    this.setState( {userIsLoggedIn: newLoggedInState} );
   };  // method to be passed into props for use in TopNavBar for Logout
 
 
