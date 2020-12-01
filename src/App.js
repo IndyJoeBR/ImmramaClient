@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     
-    this.userIsLoggedIn = this.userIsLoggedIn.bind(this);
+//    this.userIsLoggedIn = this.userIsLoggedIn.bind(this);
 
     this.state = {
       sessionToken: null,
