@@ -25,12 +25,12 @@ componentDidMount() {
   if (localStorage.getItem('token')) {
     let temp = localStorage.getItem('token');
     console.log("Component mounted: temp = ", temp);
-    this.setState({userIsLoggedIn: true});
-    console.log("userIsLoggedIn: ", this.state.userIsLoggedIn);
 
     if (temp) {
       this.setState({sessionToken: temp});
       console.log("The session token has been set to: ", temp);
+      this.setState({userIsLoggedIn: true});
+      console.log("userIsLoggedIn: ", this.state.userIsLoggedIn);
     }
    }
 };
@@ -55,6 +55,7 @@ userIsLoggedIn() {  // method checks for a session token
       <div className="App">
         <TopNavBar token={this.state.sessionToken} />
         <Router>
+          {console.log("We just hit App.js render-return.")}
           {this.userIsLoggedIn()}
         </Router>
 
