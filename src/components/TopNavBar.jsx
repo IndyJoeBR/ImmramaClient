@@ -16,7 +16,7 @@ import About from '../sections/about';
 import '../styles/TopNavBar.css'
 import { Link } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
-import Auth from  './auth/Auth';
+import Auth from  '../auth/Auth';
 
 
 class TopNavBar extends React.Component {

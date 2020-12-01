@@ -10,23 +10,36 @@ class ViewJourneys extends React.Component {
   };    //  end of constructor
 
 
-  fetchJourneys(e) {
-    console.log(e);                 // logs event
+  // fetchJourneys(e) {
+  //   console.log(e);                 // logs event
 
-    e.preventDefault();
+  //   e.preventDefault();
 
 
-   // https://immramaserver.herokuapp.com/journey/getAllJourneys
+  //  // https://immramaserver.herokuapp.com/journey/getAllJourneys
 
   
-    fetch(`${APIURL}/journey/getAllJourneys`, {
-      method: 'GET',
-      headers: new Headers ({ 'Content-Type': 'application/json' })
+  //   fetch(`${APIURL}/journey/getAllJourneys`, {
+  //     method: 'GET',
+  //     headers: new Headers ({ 'Content-Type': 'application/json' })
 
-    });  //  End of Fetch results
+  //   });  //  End of Fetch results
 
-  }}
+  // }}
 
+fetchJourneys(e) {
+ console.log(e);
+ e.preventDefault();
+
+ fetch(`${APIURL}}/journey/getAllJourneys`, {
+   method: 'GET',
+   headers: new Headers({
+     'Content-Type': 'application/json'
+   }).then(res => res.json())
+   .then(res => console.log(res))
+   .catch(err => console.log(err))
+ })
+}
 
 
   render () {
