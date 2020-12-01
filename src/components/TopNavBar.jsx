@@ -101,7 +101,7 @@ class TopNavBar extends React.Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.navbarIsOpen} navbar>
             <Nav className="mr-auto" navbar>
-            <NavItem>
+              <NavItem>
                 <Button color="dark"><Link to="/">Home</Link></Button>{' '}
               </NavItem>
               <NavItem>
@@ -137,24 +137,27 @@ class TopNavBar extends React.Component {
         : <Auth /> }
         </Navbar>
 
-        <Switch>
-          <Route exact path="/ViewJourneys">
-            <ViewJourneys journeyEndpoint={"/getAllJourneys"} />
-          </Route>
-          <Route exact path="/ViewMyJourneys">
-            <ViewJourneys journeyEndpoint={"/getAllUsersJourneys/"+this.props.username} />
-          </Route>
-          <Route exact path="/Sections/About">
-            <About />
-          </Route>
-          <Route exact path="/Sections/ContactUs">
-            <ContactUs />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Switch>
-
+        {this.props.userIsLoggedIn ?
+        <div>
+          <Switch>
+            <Route exact path="/ViewJourneys">
+              <ViewJourneys journeyEndpoint={"/getAllJourneys"} />
+            </Route>
+            <Route exact path="/ViewMyJourneys">
+              <ViewJourneys journeyEndpoint={"/getAllUsersJourneys/"+this.props.username} />
+            </Route>
+            <Route exact path="/Sections/About">
+              <About />
+            </Route>
+            <Route exact path="/Sections/ContactUs">
+              <ContactUs />
+            </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+        : ""}
 
       </div>
 
