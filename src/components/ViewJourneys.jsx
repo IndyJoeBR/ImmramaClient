@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-
+import APIURL from "../helpers/environment";
 
 
 class ViewJourneys extends React.Component {

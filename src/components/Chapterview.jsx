@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-
+import APIURL from "../helpers/environment";
 
 
 class Chapterview extends React.Component {
