@@ -13,10 +13,13 @@ import {   Collapse,
   DropdownItem,
   NavbarText } from 'reactstrap';
 import About from '../sections/about';
+import ContactUs from '../sections/contactUs';
 import '../styles/TopNavBar.css'
 import { Link, Route, Switch } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
 import Auth from  '../auth/Auth';
+import Home from "./Home";
+import ViewJourneys from "./ViewJourneys";
 
 
 class TopNavBar extends React.Component {
