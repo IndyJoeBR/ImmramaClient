@@ -4,14 +4,13 @@ import RegisterClass from './registerClass';
 import LoginClass from './loginClass';
 import '../styles/auth.css';
 
-
 class Auth extends React.Component {
-
 
   render () {
 
     return (
       <div className="AuthForms">
+        <h3>Welcome to Immrama</h3>
         <h4>Registration and login</h4>
         <Container className="auth-container">
           <Row>

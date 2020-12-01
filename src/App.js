@@ -54,7 +54,6 @@ userIsLoggedIn() {  // method checks for a session token
     return (
       <div className="App">
         <TopNavBar token={this.state.sessionToken} />
-        <h3>Welcome to Immrama</h3>
         <Router>
           {this.userIsLoggedIn()}
         </Router>
