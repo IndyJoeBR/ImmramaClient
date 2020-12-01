@@ -16,7 +16,6 @@ import About from '../sections/about';
 import '../styles/TopNavBar.css'
 import { Link } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
-import navbarTiling from '../styles/assets/tile01.jpg';
 
 
 
@@ -53,6 +52,7 @@ class TopNavBar extends React.Component {
   //   console.log("User is logged out.")
   // };
 
+//  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
 
   render (props) {
 
@@ -76,12 +76,10 @@ class TopNavBar extends React.Component {
               <Button color="primary">My Journeys</Button>{' '}
             </NavItem>
             <NavItem>
-
-                <Button color="primary">My Journeys</Button>{' '}
-
+                <Button color="info">About</Button>{' '}
             </NavItem>
             <NavItem>
-              <Button color="info">About</Button>{' '}
+              <Button color="info">Contact Us</Button>{' '}
             </NavItem>
           </Nav>
           <UncontrolledDropdown inNavbar>
@@ -92,7 +90,7 @@ class TopNavBar extends React.Component {
               </Button>
               <DropdownMenu right>
                 <DropdownItem>
-                  <Button color="danger" size="sm" >Logout</Button>
+                  <Button color="danger" size="sm">Logout</Button>
                 </DropdownItem>
                 <DropdownItem>
                   Change Password
