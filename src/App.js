@@ -27,9 +27,11 @@ componentDidMount() {
     console.log("Component mounted: temp = ", temp);
 
     if (temp) {
-      this.setState({sessionToken: temp});
+      this.setState({
+        sessionToken: temp,
+        userIsLoggedIn: true
+      });
       console.log("The session token has been set to: ", temp);
-      this.setState({userIsLoggedIn: true});
       console.log("userIsLoggedIn: ", this.state.userIsLoggedIn);
     }
    }
@@ -43,7 +45,7 @@ userIsLoggedIn() {  // method checks for a session token
     console.log("The session token = null.  We go Auth.");
     return <Auth token={this.state.sessionToken} />
   } else {
-    console.log("The session token != null.  We go Home.")
+    console.log("The session token != null.  We go Home.", this.state.sessionToken);
     return <Home token={this.state.sessionToken} /> 
   };
 };
@@ -53,10 +55,10 @@ userIsLoggedIn() {  // method checks for a session token
 
     return (
       <div className="App">
-        <TopNavBar token={this.state.sessionToken} />
+        <TopNavBar token={this.state.sessionToken} userIsLoggedIn={this.state.userIsLoggedIn} />
         <Router>
           {console.log("We just hit App.js render-return.")}
-          {this.userIsLoggedIn()}
+          {/* {this.userIsLoggedIn()} */}
         </Router>
 
         <Footer token={this.state.sessionToken} />

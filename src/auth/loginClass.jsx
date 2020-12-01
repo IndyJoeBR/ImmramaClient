@@ -10,6 +10,7 @@ class LoginClass extends React.Component {
   constructor(props) {
     super(props);
     this.loginSubmit = this.loginSubmit.bind(this);
+    this.updateUserState = this.updateUserState.bind(this);
 
     this.state = {
       username: '',

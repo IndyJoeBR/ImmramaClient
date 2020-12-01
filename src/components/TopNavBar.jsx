@@ -16,7 +16,7 @@ import About from '../sections/about';
 import '../styles/TopNavBar.css'
 import { Link } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
-
+import Auth from  './auth/Auth';
 
 
 class TopNavBar extends React.Component {
@@ -52,6 +52,8 @@ class TopNavBar extends React.Component {
   //   console.log("User is logged out.")
   // };
 
+
+
 //  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
 
   render (props) {
@@ -63,41 +65,45 @@ class TopNavBar extends React.Component {
         <NavbarBrand href="/">
           <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
           Immrama</NavbarBrand>
-        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-        <Collapse isOpen={!this.state.navbarIsOpen} navbar>
-          <Nav className="mr-auto" navbar>
-          <NavItem>
-              <Button color="dark">Home</Button>{' '}
-            </NavItem>
+        {this.props.userIsLoggedIn ? 
+        <div>
+          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!this.state.navbarIsOpen} navbar>
+            <Nav className="mr-auto" navbar>
             <NavItem>
-              <Button color="primary">Journeys</Button>{' '}
-            </NavItem>
-            <NavItem>
-              <Button color="primary">My Journeys</Button>{' '}
-            </NavItem>
-            <NavItem>
-                <Button color="info">About</Button>{' '}
-            </NavItem>
-            <NavItem>
-              <Button color="info">Contact Us</Button>{' '}
-            </NavItem>
-          </Nav>
-          <UncontrolledDropdown inNavbar>
-              <Button color="success" size="sm" classname="btnAccount">
-                <DropdownToggle nav caret>
-                  Account
-                </DropdownToggle>
-              </Button>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Button color="danger" size="sm">Logout</Button>
-                </DropdownItem>
-                <DropdownItem>
-                  <Button color="warning" size="sm">Change Password</Button>
-                </DropdownItem>
-              </DropdownMenu>
-          </UncontrolledDropdown>
-        </Collapse>
+                <Button color="dark">Home</Button>{' '}
+              </NavItem>
+              <NavItem>
+                <Button color="primary">Journeys</Button>{' '}
+              </NavItem>
+              <NavItem>
+                <Button color="primary">My Journeys</Button>{' '}
+              </NavItem>
+              <NavItem>
+                  <Button color="info">About</Button>{' '}
+              </NavItem>
+              <NavItem>
+                <Button color="info">Contact Us</Button>{' '}
+              </NavItem>
+            </Nav>
+            <UncontrolledDropdown inNavbar>
+                <Button color="success" size="sm" classname="btnAccount">
+                  <DropdownToggle nav caret>
+                    Account
+                  </DropdownToggle>
+                </Button>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <Button color="danger" size="sm">Logout</Button>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <Button color="warning" size="sm">Change Password</Button>
+                  </DropdownItem>
+                </DropdownMenu>
+            </UncontrolledDropdown>
+          </Collapse>
+        </div>
+        : <Auth /> }
         </Navbar>
       </div>
 
