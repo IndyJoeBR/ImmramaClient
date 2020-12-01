@@ -12,7 +12,7 @@ import {   Collapse,
   DropdownMenu,
   DropdownItem,
   NavbarText } from 'reactstrap';
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, Redirect } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
 import '../styles/TopNavBar.css'
 import Auth from  '../auth/Auth';
@@ -93,7 +93,7 @@ class TopNavBar extends React.Component {
       <div>
         <Navbar light expand="md" className="navbarBackground" >
 
-        <NavbarBrand href="/">
+        <NavbarBrand>
           <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
           Immrama</NavbarBrand>
         {this.props.userIsLoggedIn ?
@@ -139,6 +139,7 @@ class TopNavBar extends React.Component {
 
         {this.props.userIsLoggedIn ?
         <div>
+          <Redirect to="/" />
           <Switch>
             <Route exact path="/ViewJourneys">
               <ViewJourneys journeyEndpoint={"/getAllJourneys"} />

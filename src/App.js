@@ -5,7 +5,8 @@ import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 import Auth from  './auth/Auth';
 import Home from  './components/Home';
-import { BrowserRouter as Router, } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 class App extends React.Component {
 
@@ -61,10 +62,7 @@ class App extends React.Component {
       </div>
 
     );  //  end of return
-
   };  //  end of render
-
-
 };  //  end of App class
 
 export default App;

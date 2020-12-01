@@ -46,8 +46,7 @@ class LoginClass extends React.Component {
         console.log("Login endpoint complete!");
         localStorage.setItem('token', data.sessionToken); // puts in local storage for App and Authorization Header
         console.log("The username is:", this.state.username);
-    })
-    .then( (response) => response.redirect(`${APIURL}/`) ) 
+    }) 
     .catch( (error) => console.log(error) );
   };  //  end of loginSubmit
 
