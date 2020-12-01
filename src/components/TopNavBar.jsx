@@ -31,6 +31,7 @@ class TopNavBar extends React.Component {
   };  //  end of constructor
 
 
+
   toggleNavbar () {
     this.setState( {navbarIsOpen: (!this.state.navbarIsOpen)} )
 
@@ -45,7 +46,6 @@ class TopNavBar extends React.Component {
   };
 
 
-
   // immramaLogout() {
   //   localStorage.clear();
   //   // TODO -- clear the sessionToken from props (get it there first)
@@ -53,10 +53,13 @@ class TopNavBar extends React.Component {
   // };
 
 
-
 //  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
 
-  render (props) {
+
+  render () {
+
+    console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
+    console.log("Entering TopNavBar ternary.");
 
     return (
       <div>
@@ -65,7 +68,7 @@ class TopNavBar extends React.Component {
         <NavbarBrand href="/">
           <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
           Immrama</NavbarBrand>
-        {this.props.userIsLoggedIn ? 
+        {this.props.userIsLoggedIn ?
         <div>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.navbarIsOpen} navbar>

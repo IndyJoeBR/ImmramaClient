@@ -21,24 +21,24 @@ class LoginClass extends React.Component {
   };    //  end of constructor
 
 
-  updateUserState (adminStatus, username, token) {
-    this.setState( {
-        userIsAdmin: adminStatus,
-        username: username,
-        sessionToken: token
-    });
-    // console.log("         The updated state variables are: ")
-    // console.log("Username:",this.state.username);
-    // console.log("SessionToken:",this.state.sessionToken);
-    // console.log("'token' is localstorage is:", localStorage.getItem('token') );
-    // console.log("userIsAdmin:",this.state.userIsAdmin);
-    // console.log("User is logged in!");
-  };
+  // updateUserState (adminStatus, username, token) {
+  //   this.setState( {
+  //       userIsAdmin: adminStatus,
+  //       username: username,
+  //       sessionToken: token
+  //   });
+  //   // console.log("         The updated state variables are: ")
+  //   // console.log("Username:",this.state.username);
+  //   // console.log("SessionToken:",this.state.sessionToken);
+  //   // console.log("'token' is localstorage is:", localStorage.getItem('token') );
+  //   // console.log("userIsAdmin:",this.state.userIsAdmin);
+  //   // console.log("User is logged in!");
+  // };
 
 
   loginSubmit (event) {
     event.preventDefault();
-    
+
     let username = this.state.username;
     let password = this.state.password;
 
@@ -54,7 +54,12 @@ class LoginClass extends React.Component {
     .then( (data) => { 
         console.log(data);
         console.log("Login endpoint complete!");
-        this.updateUserState(data.user.userAdmin, data.user.username, data.sessionToken);
+        this.setState( {
+          userIsAdmin: data.user.userAdmin,
+          username: data.user.username,
+          sessionToken: data.sessionToken
+      });
+//        this.updateUserState(data.user.userAdmin, data.user.username, data.sessionToken);
         localStorage.setItem('token', data.sessionToken); // puts in local storage for App and Authorization Header
     })
     .catch( (error) => console.log(error) );

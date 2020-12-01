@@ -32,23 +32,22 @@ componentDidMount() {
         userIsLoggedIn: true
       });
       console.log("The session token has been set to: ", temp);
-      console.log("userIsLoggedIn: ", this.state.userIsLoggedIn);
     }
    }
 };
 
 
-userIsLoggedIn() {  // method checks for a session token
-  console.log("This is the sessionToken:", this.state.sessionToken);
-  //if (this.state.sessionToken === localStorage.getItem('token')) { 
-  if (this.state.sessionToken === null) {
-    console.log("The session token = null.  We go Auth.");
-    return <Auth token={this.state.sessionToken} />
-  } else {
-    console.log("The session token != null.  We go Home.", this.state.sessionToken);
-    return <Home token={this.state.sessionToken} /> 
-  };
-};
+// userIsLoggedIn() {  // method checks for a session token
+//   console.log("This is the sessionToken:", this.state.sessionToken);
+//   //if (this.state.sessionToken === localStorage.getItem('token')) { 
+//   if (this.state.sessionToken === null) {
+//     console.log("The session token = null.  We go Auth.");
+//     return <Auth token={this.state.sessionToken} />
+//   } else {
+//     console.log("The session token != null.  We go Home.", this.state.sessionToken);
+//     return <Home token={this.state.sessionToken} /> 
+//   };
+// };
 
 
   render () {
@@ -56,10 +55,6 @@ userIsLoggedIn() {  // method checks for a session token
     return (
       <div className="App">
         <TopNavBar token={this.state.sessionToken} userIsLoggedIn={this.state.userIsLoggedIn} />
-        <Router>
-          {console.log("We just hit App.js render-return.")}
-          {/* {this.userIsLoggedIn()} */}
-        </Router>
 
         <Footer token={this.state.sessionToken} />
       </div>

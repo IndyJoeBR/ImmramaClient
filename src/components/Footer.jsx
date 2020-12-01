@@ -7,8 +7,9 @@ class Footer extends React.Component {
 
     return (
       <div>
+
         <Row>
-          <p>&copy; 2020 Joseph Benson</p>
+          <p>&nbsp; &copy; 2020 Joseph Benson</p>
         </Row>
       </div>
 
