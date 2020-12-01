@@ -7,7 +7,6 @@ import {   Collapse,
   Nav,
   NavItem,
   NavLink,
-
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -46,9 +45,11 @@ class TopNavBar extends React.Component {
   };
 
 
+
   immramaLogout() {
     localStorage.clear();
-
+    // TODO -- clear the sessionToken from props (get it there first)
+    console.log("User is logged out.")
   };
 
 
@@ -87,7 +88,7 @@ class TopNavBar extends React.Component {
                 </DropdownToggle>
               </Button>
               <DropdownMenu right>
-                <DropdownItem>
+                <DropdownItem onClick={this.immramaLogout()}>
                   Logout
                 </DropdownItem>
                 <DropdownItem>
