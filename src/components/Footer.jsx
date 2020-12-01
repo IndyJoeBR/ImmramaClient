@@ -10,7 +10,7 @@ class Footer extends React.Component {
       <div>
 
         <Row>
-          <p>&nbsp; &copy; 2020 Joseph Benson</p>
+          <p className="centerFooter">&nbsp; &copy; 2020 Joseph Benson</p>
         </Row>
       </div>
 

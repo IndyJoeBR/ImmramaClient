@@ -77,7 +77,7 @@ class TopNavBar extends React.Component {
       <Route>
         <component props={props} />
       </Route>
-    <Switch>
+    </Switch>
   </Router>
 */
 
@@ -111,6 +111,9 @@ class TopNavBar extends React.Component {
                   <Button color="info">About</Button>{' '}
               </NavItem>
               <NavItem>
+                <Link to="../sections/about">About</Link>
+              </NavItem>
+              <NavItem>
                 <Button color="info">Contact Us</Button>{' '}
               </NavItem>
             </Nav>
@@ -133,6 +136,18 @@ class TopNavBar extends React.Component {
         </div>
         : <Auth /> }
         </Navbar>
+
+        <Switch>
+          <Route exact path="../sections/about">
+            <About />
+          </Route>
+          <Route>
+            <component props={props} />
+          </Route>
+        </Switch>
+
+
+
       </div>
 
     );  //  end of return
