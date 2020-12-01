@@ -4,6 +4,29 @@ import { Container, Row, Col } from 'reactstrap';
 
 
 class ViewJourneys extends React.Component {
+  
+  constructor(props) {
+    super(props);
+  };    //  end of constructor
+
+
+  fetchJourneys(e) {
+    console.log(e);                 // logs event
+
+    e.preventDefault();
+
+
+   // https://immramaserver.herokuapp.com/journey/getAllJourneys
+
+  
+    fetch(`${APIURL}/journey/getAllJourneys`, {
+      method: 'GET',
+      headers: new Headers ({ 'Content-Type': 'application/json' })
+
+    });  //  End of Fetch results
+
+  }}
+
 
 
   render () {

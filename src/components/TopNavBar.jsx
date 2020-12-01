@@ -93,7 +93,7 @@ class TopNavBar extends React.Component {
                   <Button color="danger" size="sm">Logout</Button>
                 </DropdownItem>
                 <DropdownItem>
-                  Change Password
+                  <Button color="warning" size="sm">Change Password</Button>
                 </DropdownItem>
               </DropdownMenu>
           </UncontrolledDropdown>
