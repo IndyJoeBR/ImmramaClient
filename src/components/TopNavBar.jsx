@@ -46,12 +46,12 @@ class TopNavBar extends React.Component {
 
 
   immramaLogout() {
+    console.log("Starting logout");
     localStorage.clear();
     this.props.setState({
       token: '',
       userIsLoggedIn: false
-    })
-    // TODO -- clear the sessionToken from props (get it there first)
+    });
     console.log("User is logged out.")
   };
 
@@ -116,7 +116,7 @@ class TopNavBar extends React.Component {
                 </Button>
                 <DropdownMenu right>
                   <DropdownItem>
-                    <Button color="danger" size="sm" type="submit" onSubmit={this.immramaLogout} >Logout</Button>
+                    <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
                   </DropdownItem>
                   <DropdownItem>
                     <Button color="warning" size="sm">Change Password</Button>
