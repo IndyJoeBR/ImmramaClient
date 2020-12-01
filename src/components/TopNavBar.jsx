@@ -25,6 +25,7 @@ class TopNavBar extends React.Component {
   constructor (props) {
     super(props)
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.immramaLogout = this.immramaLogout.bind(this);
 
     this.state = { navbarIsOpen: true };
 
