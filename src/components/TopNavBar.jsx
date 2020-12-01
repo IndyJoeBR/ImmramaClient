@@ -165,7 +165,7 @@ class TopNavBar extends React.Component {
           <Route exact path="../sections/about">
             <About />
           </Route>
-          <Route exact path="../sections/about">
+          <Route exact path="../sections/contactUs">
             <ContactUs />
           </Route>
         </Switch>
