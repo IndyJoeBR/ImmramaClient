@@ -102,10 +102,19 @@ class TopNavBar extends React.Component {
                 <Button color="dark">Home</Button>{' '}
               </NavItem>
               <NavItem>
+                <Link to="/Home">About</Link>
+              </NavItem>
+              <NavItem>
                 <Button color="primary">Journeys</Button>{' '}
               </NavItem>
               <NavItem>
+                <Link to="/ViewJourneys">About</Link>
+              </NavItem>
+              <NavItem>
                 <Button color="primary">My Journeys</Button>{' '}
+              </NavItem>
+              <NavItem>
+                <Link to="/ViewJourneys">My Journeys</Link>
               </NavItem>
               <NavItem>
                   <Button color="info">About</Button>{' '}
@@ -115,6 +124,9 @@ class TopNavBar extends React.Component {
               </NavItem>
               <NavItem>
                 <Button color="info">Contact Us</Button>{' '}
+              </NavItem>
+              <NavItem>
+                <Link to="../sections/contactUs">Contact Us</Link>
               </NavItem>
             </Nav>
             <UncontrolledDropdown inNavbar>
@@ -138,8 +150,20 @@ class TopNavBar extends React.Component {
         </Navbar>
 
         <Switch>
+          <Route exact path="/Home">
+            <Home />
+          </Route>
+          <Route exact path="/ViewJourneys">
+            <ViewJourneys journeyEndpoint={} />
+          </Route>
+          <Route exact path="/ViewJourneys">
+            <ViewJourneys journeyEndpoint={} />
+          </Route>
           <Route exact path="../sections/about">
             <About />
+          </Route>
+          <Route exact path="../sections/about">
+            <ContactUs />
           </Route>
         </Switch>
 
