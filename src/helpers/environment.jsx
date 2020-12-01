@@ -6,7 +6,7 @@ switch (window.location.hostname) {
         break;
 //    case 'immrama.herokuapp.com':                                NOBODY SEEMS TO KNOW WHERE THIS COMES FROM (not same APIURL in module)
     default:
-        APIURL = "https://immrama.herokuapp.com";
+        APIURL = "https://immramaserver.herokuapp.com";
 }
 
 export default APIURL;
@@ -14,5 +14,5 @@ export default APIURL;
 
 // Deployed to Heroku on 11/30/2020
 //     https://immrama.herokuapp.com/
-
+// SERVER IS AT: https://immramaserver.herokuapp.com
 // git: https://git.heroku.com/immrama.git

@@ -37,7 +37,7 @@ componentDidMount() {
 
 
 userIsLoggedIn() {  // method checks for a session token
-  console.log("This is the sessionToken", this.state.sessionToken);
+  console.log("This is the sessionToken:", this.state.sessionToken);
   //if (this.state.sessionToken === localStorage.getItem('token')) { 
   if (this.state.sessionToken === null) {
     console.log("The session token = null.  We go Auth.");
