@@ -6,6 +6,10 @@ import '../styles/About.css';
 
 class About extends React.Component {
 
+    constructor(props) {
+        super(props);
+      };    //  end of constructor
+
     render () {
 
         return (
@@ -31,10 +35,9 @@ class About extends React.Component {
                 <h4>What is your immram?</h4>
 
             </div>
+            
         );  //  end of return
-
     };  //  end of render
-
 };  //  end of About class
 
 export default About;

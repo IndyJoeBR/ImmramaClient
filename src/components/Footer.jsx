@@ -6,11 +6,15 @@ class Footer extends React.Component {
 
   render () {
 
+    const footerStyles={
+      marginLeft: "-30%"
+    }
+
     return (
       <div>
 
         <Row>
-          <p className="centerFooter">&nbsp; &copy; 2020 Joseph Benson</p>
+          <p className="centerFooter" style={footerStyles} >&nbsp; &copy; 2020 Joseph Benson</p>
         </Row>
       </div>
 

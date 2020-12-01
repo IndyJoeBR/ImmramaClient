@@ -12,14 +12,14 @@ import {   Collapse,
   DropdownMenu,
   DropdownItem,
   NavbarText } from 'reactstrap';
-import About from '../sections/about';
-import ContactUs from '../sections/contactUs';
-import '../styles/TopNavBar.css'
 import { Link, Route, Switch } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
+import '../styles/TopNavBar.css'
 import Auth from  '../auth/Auth';
 import Home from "./Home";
 import ViewJourneys from "./ViewJourneys";
+import About from '../sections/about';
+import ContactUs from '../sections/contactUs';
 
 
 class TopNavBar extends React.Component {
@@ -102,34 +102,19 @@ class TopNavBar extends React.Component {
           <Collapse isOpen={!this.state.navbarIsOpen} navbar>
             <Nav className="mr-auto" navbar>
             <NavItem>
-                <Button color="dark">Home</Button>{' '}
+                <Button color="dark"><Link to="/">Home</Link></Button>{' '}
               </NavItem>
               <NavItem>
-                <Link to="/Home">Home</Link>
+                <Button color="primary"><Link to="/ViewJourneys">Journeys</Link></Button>{' '}
               </NavItem>
               <NavItem>
-                <Button color="primary">Journeys</Button>{' '}
+                <Button color="primary"><Link to="/ViewMyJourneys">My Journeys</Link></Button>{' '}
               </NavItem>
               <NavItem>
-                <Link to="/ViewJourneys">Journeys</Link>
+                  <Button color="info"><Link to="/Sections/About">About</Link></Button>{' '}
               </NavItem>
               <NavItem>
-                <Button color="primary">My Journeys</Button>{' '}
-              </NavItem>
-              <NavItem>
-                <Link to="/ViewJourneys">My Journeys</Link>
-              </NavItem>
-              <NavItem>
-                  <Button color="info">About</Button>{' '}
-              </NavItem>
-              <NavItem>
-                <Link to="../sections/about">About</Link>
-              </NavItem>
-              <NavItem>
-                <Button color="info">Contact Us</Button>{' '}
-              </NavItem>
-              <NavItem>
-                <Link to="../sections/contactUs">Contact Us</Link>
+                <Button color="info"><Link to="/Sections/ContactUs">Contact Us</Link></Button>{' '}
               </NavItem>
             </Nav>
             <UncontrolledDropdown inNavbar>
@@ -153,23 +138,22 @@ class TopNavBar extends React.Component {
         </Navbar>
 
         <Switch>
-          <Route exact path="/Home">
-            <Home />
-          </Route>
           <Route exact path="/ViewJourneys">
             <ViewJourneys journeyEndpoint={"/getAllJourneys"} />
           </Route>
-          <Route exact path="/ViewJourneys">
+          <Route exact path="/ViewMyJourneys">
             <ViewJourneys journeyEndpoint={"/getAllUsersJourneys/"+this.props.username} />
           </Route>
-          <Route exact path="../sections/about">
+          <Route exact path="/Sections/About">
             <About />
           </Route>
-          <Route exact path="../sections/contactUs">
+          <Route exact path="/Sections/ContactUs">
             <ContactUs />
           </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
         </Switch>
-
 
 
       </div>

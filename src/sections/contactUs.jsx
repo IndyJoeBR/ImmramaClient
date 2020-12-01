@@ -5,6 +5,10 @@ import '../styles/ContactUs.css';
 
 class ContactUs extends React.Component {
 
+    constructor(props) {
+        super(props);
+      };    //  end of constructor
+
     render () {
 
         return (

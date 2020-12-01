@@ -37,10 +37,7 @@ fetchJourneys(e) {
       </div>
 
     );  //  end of return
-
   };  //  end of render
-
-
 };  //  end of Auth class
 
 export default ViewJourneys;

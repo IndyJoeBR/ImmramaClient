@@ -55,6 +55,7 @@ class App extends React.Component {
                       userIsLoggedIn={this.state.userIsLoggedIn} setUserIsLoggedIn={this.setUserIsLoggedIn}
                       setSessionToken={this.setSessionToken}
           />
+          
           <Footer token={this.state.sessionToken} />
         </Router>
       </div>
