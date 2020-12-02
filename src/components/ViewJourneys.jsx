@@ -29,7 +29,7 @@ class ViewJourneys extends React.Component {
 fetchJourneys() {
 
 
- fetch(`${APIURL}}/journey/getAllJourneys`, {
+ fetch(`${APIURL}/journey/getAllJourneys`, {
    method: 'GET',
    headers: new Headers({
      'Content-Type': 'application/json'
