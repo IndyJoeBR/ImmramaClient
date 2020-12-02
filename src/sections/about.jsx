@@ -14,7 +14,7 @@ class About extends React.Component {
 
         return (
             <div className="about">
-                <h2 className="aboutHeadlines" > -  Immrama  -</h2>
+                <h2 className="primaryHeadline" > -  Immrama  -</h2>
                 <h4 className="aboutHeadlines" >Share Your Journey</h4>
             
                 <h3 className="aboutHeadlines" >About</h3>
@@ -28,7 +28,7 @@ class About extends React.Component {
 
                 <p>While most people who travel now fly, that is actually very similar to a sea voyage. The (air) ship still has a captain and there are passengers. (And there is certainly still 'steerage' for the majority of us.) And we still travel from place to place. However, we are now rarely on a quest or seeking adventure; although... maybe we should be.</p>
 
-                <p>Instead of writing a travel blog, I would like you to share a story about your adventures while you were traveling. Tell us where you went and why and then something interesting that happened. Attach a picture or a video or both and share your adventure with others.</p>
+                <p>Instead of writing a travel blog, share a story about your adventures while you were traveling. Tell us where you went and why and then something interesting that happened. Attach a picture or a video or both and share your adventure with others.</p>
 
                 <p>Not a traveller?  Maybe you have another journey you have been on.  Starting a new job.  Loosing weight.  Two weeks in quarantine and what you did to occupy your time.  Learning to play an instrument.  Those are all a kind of journey.  You can share those stories as well.</p>
 

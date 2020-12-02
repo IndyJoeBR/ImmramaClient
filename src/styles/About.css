@@ -2,6 +2,12 @@
   text-align: left;
 }
 
+.primaryHeadline {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
 .aboutHeadlines {
   text-align: center;
 }
