@@ -14,7 +14,7 @@ class ViewJourneys extends React.Component {
   componentDidMount() {
     console.log("View Journeys mounted.")
     this.fetchJourneys();
-    
+
   };
 
 
@@ -33,8 +33,9 @@ fetchJourneys() {
    method: 'GET',
    headers: new Headers({
      'Content-Type': 'application/json'
-   }).then(response => response.json())
-   .then(response => console.log(response))
+   })
+   .then( (response) => response.json() )
+   .then( (journeyData) => console.log(journeyData) )
    .catch(err => console.log(err))
  })
 }
