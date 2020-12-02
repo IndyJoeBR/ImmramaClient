@@ -12,7 +12,7 @@ class ViewJourneys extends React.Component {
 
 
   componentDidMount() {
-    console.log("View Journeys mounted.";
+    console.log("View Journeys mounted.");
   };
 
 
