@@ -7,11 +7,13 @@ class ViewJourneys extends React.Component {
   
   constructor(props) {
     super(props);
+    this.fetchJourneys = this.fetchJourneys.bind(this);
   };    //  end of constructor
 
 
   componentDidMount() {
     console.log("View Journeys mounted.")
+    this.fetchJourneys();
     
   };
 
@@ -20,9 +22,12 @@ class ViewJourneys extends React.Component {
  // https://immramaserver.herokuapp.com/journey/getAllJourneys
 
 
-fetchJourneys(e) {
- console.log(e);
- e.preventDefault();
+//fetchJourneys(e) {
+// console.log(e);
+// e.preventDefault();
+
+fetchJourneys() {
+
 
  fetch(`${APIURL}}/journey/getAllJourneys`, {
    method: 'GET',
