@@ -7,6 +7,12 @@
   height: auto;
 }
 
+.navbarBrandText {
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 3px gray;
+}
+
 .btnAccount {
   text-decoration: none;
   color: black
@@ -20,4 +26,8 @@
 .btnAccount:link {
   text-decoration: none;
   color: black
+}
+
+Button {
+  text-decoration: none;
 }

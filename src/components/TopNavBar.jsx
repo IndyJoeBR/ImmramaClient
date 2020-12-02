@@ -93,7 +93,7 @@ class TopNavBar extends React.Component {
       <div>
         <Navbar light expand="md" className="navbarBackground" >
 
-        <NavbarBrand>
+        <NavbarBrand className="navbarBrandText">
           <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
           Immrama</NavbarBrand>
         {this.props.userIsLoggedIn ?
