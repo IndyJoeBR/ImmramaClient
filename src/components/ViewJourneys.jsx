@@ -18,6 +18,7 @@ class ViewJourneys extends React.Component {
 
   componentDidMount() {
     console.log("View Journeys mounted.");
+    console.log(`${APIURL}`);
   };
 
 
@@ -34,7 +35,7 @@ class ViewJourneys extends React.Component {
       headers: new Headers( {'Content-Type': 'application/json'} )
     })
     .then( (response) => response.json() )
-    .then( (allJourneyData) => this.displayJourneyInCards(allJourneyData) )
+    .then( (allJourneyData) => console.log(allJourneyData) )
     .catch(err => console.log(err))
   };  // end of fetchJourneys
 
