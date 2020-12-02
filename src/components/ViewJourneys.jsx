@@ -34,8 +34,7 @@ class ViewJourneys extends React.Component {
       headers: new Headers( {'Content-Type': 'application/json'} )
     })
     .then( (response) => response.json() )
-    .then( (allJourneyData) => console.log(allJourneyData) )
-    .then( this.displayJourneyInCards(allJourneyData) )
+    .then( (allJourneyData) => this.displayJourneyInCards(allJourneyData) )
     .catch(err => console.log(err))
   };  // end of fetchJourneys
 
