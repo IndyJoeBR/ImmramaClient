@@ -26,14 +26,12 @@ class ViewJourneys extends React.Component {
 
     fetch(`${APIURL}/journey/getAllJourneys`, {
       method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json'
+      headers: new Headers( {'Content-Type': 'application/json'} )
     })
     .then( (response) => response.json() )
     .then( (journeyData) => console.log(journeyData) )
     .catch(err => console.log(err))
-    })
-  }
+  };  // end of fetchJourneys
 
 
   render () {
