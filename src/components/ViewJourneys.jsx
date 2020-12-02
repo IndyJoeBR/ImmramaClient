@@ -12,9 +12,7 @@ class ViewJourneys extends React.Component {
 
 
   componentDidMount() {
-    console.log("View Journeys mounted.")
-    this.fetchJourneys();
-
+    console.log("View Journeys mounted.";
   };
 
 
@@ -22,23 +20,20 @@ class ViewJourneys extends React.Component {
  // https://immramaserver.herokuapp.com/journey/getAllJourneys
 
 
-//fetchJourneys(e) {
-// console.log(e);
-// e.preventDefault();
+  fetchJourneys(e) {
+    console.log(e);
+    e.preventDefault();
 
-fetchJourneys() {
-
-
- fetch(`${APIURL}/journey/getAllJourneys`, {
-   method: 'GET',
-   headers: new Headers({
-     'Content-Type': 'application/json'
-   })
-   .then( (response) => response.json() )
-   .then( (journeyData) => console.log(journeyData) )
-   .catch(err => console.log(err))
- })
-}
+    fetch(`${APIURL}/journey/getAllJourneys`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+    })
+    .then( (response) => response.json() )
+    .then( (journeyData) => console.log(journeyData) )
+    .catch(err => console.log(err))
+    })
+  }
 
 
   render () {
@@ -47,6 +42,7 @@ fetchJourneys() {
       <div>
           Here you can view the journeys
           {this.props.journeyEndpoint}
+          <Button color="primary" onClick={this.fetchJourneys} >Get Journeys</Button>
       </div>
 
     );  //  end of return
