@@ -2,12 +2,17 @@ import React from 'react';
 import { Button, Container, Row, Col } from 'reactstrap';
 import APIURL from "../helpers/environment";
 
+// *****  View Journeys requires no validation as it
+//        is available to all logged in users and
+//        only allows a user to read journeys.
 
 class ViewJourneys extends React.Component {
   
   constructor(props) {
     super(props);
     this.fetchJourneys = this.fetchJourneys.bind(this);
+    this.displayJourneyInCards = this.displayJourneyInCards.bind(this);
+
   };    //  end of constructor
 
 
@@ -29,9 +34,17 @@ class ViewJourneys extends React.Component {
       headers: new Headers( {'Content-Type': 'application/json'} )
     })
     .then( (response) => response.json() )
-    .then( (journeyData) => console.log(journeyData) )
+    .then( (allJourneyData) => console.log(allJourneyData) )
+    .then( this.displayJourneyInCards(allJourneyData) )
     .catch(err => console.log(err))
   };  // end of fetchJourneys
+
+
+  displayJourneyInCards(allJourneys) {
+    console.log("Journeys sent for display:", allJourneys);
+  }
+
+
 
 
   render () {

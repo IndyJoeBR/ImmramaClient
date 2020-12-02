@@ -18,6 +18,7 @@ import '../styles/TopNavBar.css'
 import Auth from  '../auth/Auth';
 import Home from "./Home";
 import ViewJourneys from "./ViewJourneys";
+import ViewMyJourneys from "./MyJourneys";
 import About from '../sections/about';
 import ContactUs from '../sections/contactUs';
 
@@ -145,10 +146,10 @@ class TopNavBar extends React.Component {
           <Redirect to="/" />
           <Switch>
             <Route exact path="/ViewJourneys">
-              <ViewJourneys journeyEndpoint={"/getAllJourneys"} />
+              <ViewJourneys />
             </Route>
             <Route exact path="/ViewMyJourneys">
-              <ViewJourneys journeyEndpoint={"/getAllUsersJourneys/"+this.props.username} />
+              <ViewMyJourneys />
             </Route>
             <Route exact path="/Sections/About">
               <About />
