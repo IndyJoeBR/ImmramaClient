@@ -5,6 +5,14 @@ import APIURL from "../helpers/environment";
 
 class ViewChapters extends React.Component {
 
+  constructor(props) {
+    super(props);
+  };    //  end of constructor
+
+
+  componentDidMount() {
+    console.log("View Chapters mounted.")
+  };
 
   render () {
 

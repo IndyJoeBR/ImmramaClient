@@ -10,6 +10,13 @@ class ViewJourneys extends React.Component {
   };    //  end of constructor
 
 
+  componentDidMount() {
+    console.log("View Journeys mounted.")
+    
+  };
+
+
+
  // https://immramaserver.herokuapp.com/journey/getAllJourneys
 
 
@@ -21,8 +28,8 @@ fetchJourneys(e) {
    method: 'GET',
    headers: new Headers({
      'Content-Type': 'application/json'
-   }).then(res => res.json())
-   .then(res => console.log(res))
+   }).then(response => response.json())
+   .then(response => console.log(response))
    .catch(err => console.log(err))
  })
 }
