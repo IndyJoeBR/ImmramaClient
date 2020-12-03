@@ -10,8 +10,12 @@ class ViewJourneys extends React.Component {
   
   constructor(props) {
     super(props);
-    this.fetchJourneys = this.fetchJourneys.bind(this);
+    this.fetchAllJourneys = this.fetchAllJourneys.bind(this);
     this.displayJourneyInCards = this.displayJourneyInCards.bind(this);
+
+    this.state = {
+
+    };
 
   };    //  end of constructor
 
@@ -26,8 +30,7 @@ class ViewJourneys extends React.Component {
  // https://immramaserver.herokuapp.com/journey/getAllJourneys
 
 
-  fetchJourneys(e) {
-    console.log(e);
+ fetchAllJourneys(e) {
     e.preventDefault();
 
     fetch(`${APIURL}/journey/getAllJourneys`, {
@@ -49,11 +52,16 @@ class ViewJourneys extends React.Component {
 
   render () {
 
+    console.log("**********   THIS IS VIEW ALL JOURNEYS   **********")
+    console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
+    console.log("Username: ", this.props.username);
+    console.log("User is admin?", this.props.userIsAdmin)
+
+
     return (
       <div>
-          Here you can view the journeys
-          {this.props.journeyEndpoint}
-          <Button color="primary" onClick={this.fetchJourneys} >Get Journeys</Button>
+          Here you can view ALL journeys
+          <Button color="primary" onClick={this.fetchAllJourneys} >Get All Journeys</Button>
       </div>
 
     );  //  end of return

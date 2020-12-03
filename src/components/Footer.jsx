@@ -7,7 +7,7 @@ class Footer extends React.Component {
   render () {
 
     const footerStyles={
-      marginLeft: "-30%"
+        marginLeft: "37vw"
     }
 
     return (

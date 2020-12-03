@@ -1,3 +1,7 @@
+//  ****************   NO LONGER USED   ******************
+//  Functionality moved to App.js ----  Delete this and 
+//  Auth.css when definitely no longer needed.
+
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import RegisterClass from './registerClass';
@@ -5,6 +9,11 @@ import LoginClass from './loginClass';
 import '../styles/auth.css';
 
 class Auth extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+  };
 
   render () {
 
@@ -15,10 +24,10 @@ class Auth extends React.Component {
         <Container className="auth-container">
           <Row>
             <Col md="6" className="register-col">
-              <RegisterClass />
+              <RegisterClass setUserIsLoggedIn={this.props.setUserIsLoggedIn} />
             </Col>
             <Col md="6" className="login-col">
-             <LoginClass />
+             <LoginClass setUserIsLoggedIn={this.props.setUserIsLoggedIn} />
             </Col>
           </Row>
        </Container>

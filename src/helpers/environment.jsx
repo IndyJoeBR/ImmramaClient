@@ -1,5 +1,5 @@
-let APIURL = "";
-
+let APIURL = "https://immramaserver.herokuapp.com";   // CHANGE BACK
+/*
 switch (window.location.hostname) {
     case 'localhost' || "127.0.0.1":
         APIURL = "http://localhost:3000";
@@ -8,7 +8,7 @@ switch (window.location.hostname) {
     default:
         APIURL = "https://immramaserver.herokuapp.com";
 }
-
+*/
 export default APIURL;
 
 

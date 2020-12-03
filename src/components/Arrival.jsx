@@ -1,11 +1,10 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
 import arrivalImage from '../styles/assets/arrivalNavagatio.png';
 
-
+// Arrival's sole purpose is to display the image on the Home component
+// when no other component is being used.
 
 class Arrival extends React.Component {
-
 
   render () {
 
@@ -15,10 +14,7 @@ class Arrival extends React.Component {
       </div>
 
     );  //  end of return
-
   };  //  end of render
-
-
 };  //  end of Auth class
 
 export default Arrival;

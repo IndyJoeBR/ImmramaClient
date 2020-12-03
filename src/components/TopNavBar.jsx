@@ -87,8 +87,8 @@ class TopNavBar extends React.Component {
 
   render () {
 
+    console.log("**********   THIS IS THE NAVBAR   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
-    console.log("Entering TopNavBar ternary.");
     console.log("Username: ", this.props.username);
     console.log("User is admin?", this.props.userIsAdmin)
 
@@ -100,8 +100,7 @@ class TopNavBar extends React.Component {
         <NavbarBrand className="navbarBrandText">
           <img className="navbarLogo" src={navbarLogo} alt="lion rampant from illuminated manuscript" />
           Immrama</NavbarBrand>
-        {this.props.userIsLoggedIn ?
-        <div>
+
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.navbarIsOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -122,11 +121,11 @@ class TopNavBar extends React.Component {
               </NavItem>
             </Nav>
             <UncontrolledDropdown inNavbar>
-                <Button color="success" size="sm" classname="btnAccount">
-                  <DropdownToggle nav caret>
+
+                  <DropdownToggle nav caret className="accountContainer" >
                     Account
                   </DropdownToggle>
-                </Button>
+
                 <DropdownMenu right>
                   <DropdownItem>
                     <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
@@ -137,19 +136,24 @@ class TopNavBar extends React.Component {
                 </DropdownMenu>
             </UncontrolledDropdown>
           </Collapse>
-        </div>
-        : <Auth /> }
         </Navbar>
 
-        {this.props.userIsLoggedIn ?
-        <div>
+
           <Redirect to="/" />
           <Switch>
             <Route exact path="/ViewJourneys">
-              <ViewJourneys />
+              <ViewJourneys 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
             </Route>
             <Route exact path="/ViewMyJourneys">
-              <ViewMyJourneys />
+              <ViewMyJourneys 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
             </Route>
             <Route exact path="/Sections/About">
               <About />
@@ -158,11 +162,13 @@ class TopNavBar extends React.Component {
               <ContactUs />
             </Route>
             <Route exact path="/">
-              <Home />
+              <Home 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
             </Route>
           </Switch>
-        </div>
-        : ""}
 
       </div>
 

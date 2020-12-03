@@ -36,3 +36,10 @@ Link:link Link:visited {
   text-decoration: none;
   color: black;
 }
+
+.accountContainer {
+  border: thin solid limegreen;
+  background-color: limegreen;
+  border-radius: 5px;
+  color: black;
+}

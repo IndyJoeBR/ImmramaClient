@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
-import Auth from  './auth/Auth';
-import Home from  './components/Home';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Redirect } from "react-router-dom";
+import { Container, Row, Col } from 'reactstrap';
+import RegisterClass from './auth/registerClass';
+import LoginClass from './auth/loginClass';
 
 class App extends React.Component {
 
@@ -15,10 +15,13 @@ class App extends React.Component {
     
     this.setUserIsLoggedIn = this.setUserIsLoggedIn.bind(this);
     this.setSessionToken = this.setSessionToken.bind(this);
+    this.setUserData = this.setUserData.bind(this);
 
     this.state = {
       sessionToken: null,
-      userIsLoggedIn: false
+      userIsLoggedIn: false,
+      username: null,
+      userIsAdmin: null
     }
   };
 
@@ -46,18 +49,54 @@ class App extends React.Component {
     this.setState( {userIsLoggedIn: newLoggedInState} );
   };  // method to be passed into props for use in TopNavBar for Logout
 
+  setUserData(username, admin) {
+    console.log("setUserData username is:", username);
+    console.log("setUserData admin is:", admin);
+    this.setState( {
+      userIsLoggedIn: true,
+      username: username,
+      userIsAdmin: admin
+    })
+  }
+
+
 
   render () {
+
+
 
     return (
       <div className="App">
         <Router>
+        {this.state.userIsLoggedIn ?
+          <div>
           <TopNavBar  token={this.state.sessionToken}
-                      userIsLoggedIn={this.state.userIsLoggedIn} setUserIsLoggedIn={this.setUserIsLoggedIn}
+                      userIsLoggedIn={this.state.userIsLoggedIn}
+                      setUserIsLoggedIn={this.setUserIsLoggedIn}
                       setSessionToken={this.setSessionToken}
+                      username={this.state.username}
+                      userIsAdmin={this.state.userIsAdmin}
+                      
           />
+          </div>
+          : 
+          <div className="AuthForms">
+            <h3>Welcome to Immrama</h3>
+            <h4>Registration and login</h4>
+            <Container className="auth-container">
+              <Row>
+                <Col md="6" className="register-col">
+                  <RegisterClass />
+                </Col>
+                <Col md="6" className="login-col">
+                <LoginClass setUserData={this.setUserData} />
+                </Col>
+              </Row>
+            </Container>
+          </div>
+          }
           
-          <Footer token={this.state.sessionToken} />
+          <Footer />
         </Router>
       </div>
 
