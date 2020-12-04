@@ -182,9 +182,6 @@ class ViewMyJourneys extends React.Component {
 
 
 
-
-
-
         <div>
           <h3>Create a new journey here.</h3>
           <Form className="createJourneyForm" onSubmit={this.createJourneySubmit} type="submit">
