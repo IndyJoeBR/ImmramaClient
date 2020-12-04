@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Form, Input, Label, FormGroup } from 'reactstrap';
+import {  Button, Form, Input, Label, FormGroup, Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
 import APIURL from "../helpers/environment";
+import "../styles/MyJourneys.css"
 
 // *****  View Journeys requires no validation as it
 //        is available to all logged in users and
@@ -10,31 +11,54 @@ class ViewMyJourneys extends React.Component {
   
   constructor(props) {
     super(props);
-    this.fetchMyJourneys = this.fetchMyJourneys.bind(this);
-    this.displayJourneyInCards = this.displayJourneyInCards.bind(this);
     this.createJourneySubmit = this.createJourneySubmit.bind(this);
+    this.autoFetchUserJourneys = this.autoFetchUserJourneys.bind(this);
+    this.editJourneyModal = this.editJourneyModal.bind(this);
+    this.deleteMyJourney = this.deleteMyJourney.bind(this);
+    this.forceRender = this.forceRender.bind(this);
+    this.writeChapterModal = this.writeChapterModal.bind(this);
+    
+
 
     this.state = {
       journeyTitle: '',
       journeyStartDate: null,
       journeyEndDate: '',
-      journeyDesc: ''
+      journeyDesc: '',
+      updateJourneyTitle: '',
+      updateJourneyStartDate: null,
+      updateJourneyEndDate: '',
+      updateJourneyDesc: '',
+      userJourneys: []
     };
 
   };    //  end of constructor
 
-//  *****     NO CURRENT USE - DELETE IF UNUSED      *****
+  //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****
   componentDidMount() {
     console.log("View My Journeys mounted.");
-    console.log(`${APIURL}`);
+    this.autoFetchUserJourneys();
+  };
+
+    // **********   FORCE RE-RENDER   **********
+  // This needed when a journey is CRUDed because no
+  //    state variables are involved.
+  forceRender() {
+    this.autoFetchUserJourneys();
+    console.log("---===< Re-render after CRUD. >===---")
   };
 
 
 
+  // **********   OPEN WRITE CHAPTER MODAL   **********
+  writeChapterModal() {
+    console.log("Go here to open a modal and write a new chapter.");
+  } //  end of writeChapterModal
 
-// **********  GET ALL USER'S JOURNEYS  **********
- fetchMyJourneys(event) {
-  event.preventDefault();
+
+
+  // **********   AUTO FETCH USER'S JOURNEYS ON-MOUNT   **********
+  autoFetchUserJourneys () {
 
     let localStorageToken = localStorage.getItem('token');
 
@@ -43,33 +67,10 @@ class ViewMyJourneys extends React.Component {
       headers: new Headers( {'Content-Type': 'application/json', 'Authorization': localStorageToken } )
     })
     .then( (response) => response.json() )
-    .then( (journeys) => this.displayJourneyInCards(journeys) )
+    .then( (journeys) => this.setState( {userJourneys : journeys} ) )
     .catch(err => console.log(err) )
-  };  //  end of fetchJourneys
 
-
-// **********  DISPLAY USER'S JOURNEYS ON CARDS  **********
-  displayJourneyInCards(journeys) {
-    console.log("Starting displayJourneyInCards");
-    console.log("Journeys sent for display:", journeys);
-    let numberofUsersJourneys = journeys.length;
-    console.log("The length is: ", numberofUsersJourneys);
-
-    if(numberofUsersJourneys === 0 ) {
-      console.log("You have no Journeys recorded.")
-    } else {
-      for(let i = 0; i < numberofUsersJourneys; i++) {
-        console.log("Journey: ", i);
-        console.log("Journey Title: ",journeys[i].journeyTitle);
-        console.log("Username: ",journeys[i].JourneyUsername);
-        console.log("Dates: " + journeys[i].journeyStartDate + " - " + journeys[i].journeyEndDate);
-        console.log("Journey Title: ",journeys[i].journeyDesc);
-        console.log("__________________________________________")
-      }
-    }
-
-  };  //  end of displayJourneyInCards
-
+  };  //  end of autoFetch
 
 
   // **********  CREATE A NEW JOURNEY  **********
@@ -99,25 +100,90 @@ class ViewMyJourneys extends React.Component {
     })
     .then( (response) => response.json() )
     .then( (data) => console.log("New Journey:", data) )
+    .then( () => this.forceRender() )
     .catch( (error) => console.log(error) );
 
   };  //  end of createJourneySubmit
 
 
 
+// **********  OPEN EDIT JOURNEY MODAL  **********
+  editJourneyModal(event) {
+    console.log("Updating user's journey")
+  };  //  end of editJourneyModal
+
+
+
+
+  // **********  DELETE USER'S JOURNEYS  **********
+  deleteMyJourney(event) {
+    event.preventDefault();
+
+    alert("You are about to Delete this journey.");
+
+    let localStorageToken = localStorage.getItem('token');
+    let journeyID = event.target.value;
+
+    fetch(`${APIURL}/journey/smiteJourney/${journeyID}`, {
+      method: 'DELETE',
+      headers: new Headers( { 'Content-Type': 'application/json',
+                              'Authorization': localStorageToken
+      }),
+    })
+    .then( () => this.forceRender() )
+
+  };  //  end of delete my journey
+
+
+/* ******************************************************************/
   render () {
 
-    console.log("**********   THIS IS VIEW MY JOURNEYS   **********")
+    console.log("**********   THIS IS VIEW MY JOURNEYS")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
     console.log("Username: ", this.props.username);
     console.log("User is admin?", this.props.userIsAdmin)
 
-
-
     return (
       <div>
-          Here you can view YOUR journeys and create them here
-          <Button color="primary" onClick={this.fetchMyJourneys} >Get My Journeys</Button>
+
+        <div> 
+          {this.state.userJourneys.map ( (potato) =>
+            <div>
+              <Card className="journeyCard">
+                <CardBody className="journeyCardBody">
+                    <CardTitle  tag="h5">{potato.journeyTitle}</CardTitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">{potato.JourneyUsername}</CardSubtitle>
+                    <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
+                    <CardText>{potato.journeyEndDate}</CardText>
+                    <CardText>{potato.journeyDesc}</CardText>
+
+                    <Button color="info" size="sm"
+                            type="submit"
+                            onClick={this.writeChapterModal} value={potato.id}>
+                            Write Chapter
+                    </Button>
+
+                    <Button color="warning" size="sm"
+                            type="submit"
+                            onClick={this.editJourneyModal} value={potato.id}>
+                            Edit Journey
+                    </Button>
+
+                    <Button color="danger" size="sm"
+                            onClick={this.deleteMyJourney} value={potato.id}>
+                            Delete Journey
+                    </Button>
+
+                </CardBody>
+              </Card>
+            </div>
+          )}
+        </div> 
+
+
+
+
+
 
         <div>
           <h3>Create a new journey here.</h3>
@@ -130,8 +196,7 @@ class ViewMyJourneys extends React.Component {
                       type="text"
                       placeholder="What is the title of your journey?"
                       value={this.state.journeyTitle}
-                      onChange={
-                        (event) => this.setState (
+                      onChange={ (event) => this.setState (
                           {journeyTitle: event.target.value}
                         )
                       }
@@ -143,7 +208,7 @@ class ViewMyJourneys extends React.Component {
                       id="journeyStartDate"
                       name="journeyStartDate"
                       type="date"
-                      placeholder="When did you begin the journey: yyyy-mm-dd (required)"
+                      placeholder="When did you begin the journey: (yyyy-mm-dd required)?"
                       value={this.state.journeyStartDate}
                       onChange={
                         (event) => this.setState (
@@ -158,7 +223,7 @@ class ViewMyJourneys extends React.Component {
                       id="journeyEndDate"
                       name="journeyEndDate"
                       type="date"
-                      placeholder="When did your journey end? (yyyy-mm-dd)"
+                      placeholder="When did/will your journey end?"
                       value={this.state.journeyEndDate}
                       onChange={
                         (event) => this.setState (
@@ -194,6 +259,26 @@ class ViewMyJourneys extends React.Component {
 
     );  //  end of return
   };  //  end of render
-};  //  end of Auth class
+};  //  end of ViewMyJourneys class
 
 export default ViewMyJourneys;
+
+
+
+/*     *****   REACTSTRAP CARD    *****
+  {this.state.userJourneys.map ( (potato) =>
+    <div>
+      <Card>
+        <CardBody>
+          <CardTitle tag="h5">{potato.journeyTitle}</CardTitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">{potato.JourneyUsername}</CardSubtitle>
+          <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
+          <CardText>{potato.journeyEndDate}</CardText>
+          <CardText>{potato.journeyDesc}</CardText>
+          <Button color="warning" size="sm">Save</Button>
+          <Button color="danger" size="sm">Delete</Button>
+        </CardBody>
+      </Card>
+    </div>
+  )}
+*/

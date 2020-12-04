@@ -32,7 +32,7 @@ class About extends React.Component {
 
                 <p>Not a traveller?  Maybe you have another journey you have been on.  Starting a new job.  Loosing weight.  Two weeks in quarantine and what you did to occupy your time.  Learning to play an instrument.  Those are all a kind of journey.  You can share those stories as well.</p>
 
-                <h4 className="aboutHeadlines" >What is your immram?</h4>
+                <h3 className="aboutHeadlines" >What is your immram?</h3>
 
             </div>
 

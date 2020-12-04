@@ -15,7 +15,7 @@ class ContactUs extends React.Component {
             <div className="contactForm">
             <h2> -  Contact Us  -</h2>
             <div className="centerMe">
-                <Form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/xnqovbrl" method="post">
+                <Form id="fs-frm" name="simple-contact-form" acceptCharset="utf-8" action="https://formspree.io/f/xnqovbrl" method="post">
                     <FormGroup id="fs-frm-inputs">
                         <Label for="full-name" className="formLabels">Full Name</Label>
                         <Input type="text" name="name" id="full-name" placeholder="First and Last" required />

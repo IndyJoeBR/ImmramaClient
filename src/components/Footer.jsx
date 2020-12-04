@@ -20,6 +20,6 @@ class Footer extends React.Component {
 
     );  //  end of return
   };  //  end of render
-};  //  end of Auth class
+};  //  end of Footer class
 
 export default Footer;

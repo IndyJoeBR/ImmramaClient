@@ -1,0 +1,20 @@
+.journeyCard {
+  background: transparent;
+  border: thin solid black;
+  width: 40vw;
+  height: auto;
+  margin: 40px;
+}
+
+.journeyCardBody {
+  margin: 20px;
+}
+
+.createJourneyForm {
+  width: 50vw;
+}
+
+.Label {
+  word-wrap: normal;
+  font-size: 20px;
+}
