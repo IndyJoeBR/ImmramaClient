@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
-import APIURL from "../helpers/environment";
+//import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
+//import APIURL from "../helpers/environment";
 
+// **********************************************************
+// This is currently set aside for future functionality
 
 class ChangePasswordModal extends React.Component {
 

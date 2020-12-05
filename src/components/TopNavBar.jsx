@@ -6,16 +6,13 @@ import {   Collapse,
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  NavbarText } from 'reactstrap';
+  DropdownItem, } from 'reactstrap';
 import { Link, Route, Switch, Redirect } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
 import '../styles/TopNavBar.css'
-import Auth from  '../auth/Auth';
 import Home from "./Home";
 import ViewJourneys from "./ViewJourneys";
 import ViewMyJourneys from "./MyJourneys";
@@ -32,12 +29,10 @@ class TopNavBar extends React.Component {
     super(props)
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.immramaLogout = this.immramaLogout.bind(this);
-    this.changeUserPassword = this.changeUserPassword.bind(this);
 
     this.state = { navbarIsOpen: true };
 
   };  //  end of constructor
-
 
 
   toggleNavbar () {
@@ -55,38 +50,13 @@ class TopNavBar extends React.Component {
     console.log("User is logged out.")
   };
 
-  changeUserPassword() {
-    console.log("Change password goes here - NO CODE - NOT FUNCTIONAL");
-    // TODO  ---------  insert change password modal  ---------
-  };
-
-//  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
-//    or
-//  
-// Display component section
-/*
-  <Router>
-  anything you want to show up (all your components and all)
-
-    <Switch>
-      <Route>
-        <component props={props} />
-      </Route>
-      <Route>
-        <component props={props} />
-      </Route>
-    </Switch>
-  </Router>
-*/
 
   render () {
 
     console.log("**********   THIS IS THE NAVBAR   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
     console.log("this.props.username: ", this.props.username);
-    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
-
-
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
 
     return (
       <div>
@@ -124,9 +94,6 @@ class TopNavBar extends React.Component {
                 <DropdownMenu right>
                   <DropdownItem>
                     <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <Button color="warning" size="sm" onClick={this.changeUserPassword} >Change Password</Button>
                   </DropdownItem>
                   <DropdownItem>
                   <Button color="warning" size="sm" ><Link to="/Account">Account Details</Link></Button>{' '}
@@ -189,21 +156,32 @@ class TopNavBar extends React.Component {
             </Route>
           </Switch>
 
-
-
-
-
-
-
-
-
       </div>
 
     );  //  end of return
-
   };  //  end of render
-
-
-};  //  end of Auth class
+};  //  end of TopNavBar class
 
 export default TopNavBar;
+
+
+
+// ***** The Storage Bin *****
+//  <Link to="/account"><NavLink className="NavLink" to="/account">Account</NavLink></Link>
+//    or
+//  
+// Display component section
+/*
+  <Router>
+  anything you want to show up (all your components and all)
+
+    <Switch>
+      <Route>
+        <component props={props} />
+      </Route>
+      <Route>
+        <component props={props} />
+      </Route>
+    </Switch>
+  </Router>
+*/

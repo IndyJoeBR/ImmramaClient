@@ -55,7 +55,9 @@ class LoginClass extends React.Component {
     return (
     
       <div className='authForm' id='loginForm'>
-            <Form className="mainLogin" onSubmit={this.loginSubmit} type="submit">
+            <Form className="mainLogin"
+                  onSubmit={this.loginSubmit}
+                  type="submit">
                 <FormGroup>
                   <Label className="Label" htmlFor="loginUsername"></Label>
                   <Input  className="Input"
@@ -86,7 +88,10 @@ class LoginClass extends React.Component {
                           } 
                   />
                 </FormGroup>
-                <Button className="Button" type="submit">Login</Button>
+                <Button className="Button"
+                        type="submit">
+                        Login
+                </Button>
             </Form> 
          </div>
 
