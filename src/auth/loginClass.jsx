@@ -95,20 +95,3 @@ class LoginClass extends React.Component {
 };  //  end of LoginClass
 
 export default LoginClass;
-
-
-
-//  *****************   DELETE WHEN EVERYTHING WORKS   ***************
-  // updateUserState (adminStatus, username, token) {
-  //   this.setState( {
-  //       userIsAdmin: adminStatus,
-  //       username: username,
-  //       sessionToken: token
-  //   });
-  //   // console.log("         The updated state variables are: ")
-  //   // console.log("Username:",this.state.username);
-  //   // console.log("SessionToken:",this.state.sessionToken);
-  //   // console.log("'token' is localstorage is:", localStorage.getItem('token') );
-  //   // console.log("userIsAdmin:",this.state.userIsAdmin);
-  //   // console.log("User is logged in!");
-  // };

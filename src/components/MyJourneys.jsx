@@ -1,5 +1,7 @@
 import React from 'react';
-import {  Button, Form, Input, Label, FormGroup, Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
+import {  Button, Form, Input, Label, FormGroup,
+          Card, CardTitle, CardSubtitle, CardText, CardBody, 
+          Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import APIURL from "../helpers/environment";
 import "../styles/MyJourneys.css"
 
@@ -17,7 +19,8 @@ class ViewMyJourneys extends React.Component {
     this.deleteMyJourney = this.deleteMyJourney.bind(this);
     this.forceRender = this.forceRender.bind(this);
     this.writeChapterModal = this.writeChapterModal.bind(this);
-    
+    this.toggleModal = this.toggleModal.bind(this);
+    this.saveJourneyUpdate = this.saveJourneyUpdate.bind(this);
 
 
     this.state = {
@@ -25,6 +28,12 @@ class ViewMyJourneys extends React.Component {
       journeyStartDate: null,
       journeyEndDate: '',
       journeyDesc: '',
+      journeyIdToUpdate: '',
+      journeyTitleToUpdate: '',
+      journeyStartDateToUpdate: '',
+      journeyEndDateToUpdate: '',
+      journeyJourneyDescToUpdate: '',
+      modalClosed: false,
       updateJourneyTitle: '',
       updateJourneyStartDate: null,
       updateJourneyEndDate: '',
@@ -107,10 +116,67 @@ class ViewMyJourneys extends React.Component {
 
 
 
-// **********  OPEN EDIT JOURNEY MODAL  **********
-  editJourneyModal(event) {
-    console.log("Updating user's journey")
+
+
+  // **********  OPEN EDIT JOURNEY MODAL  **********
+  editJourneyModal(data) {
+    console.log("Updating user's journey");
+
+    let editDataJourneyID = data.id;
+    let editDataJourneyTitle = data.journeyTitle;
+    let editDataJourneyStartDate = data.journeyStartDate;
+    let editDataJourneyEndDate = data.journeyEndDate;
+    let editDataJourneyDesc = data.journeyDesc;
+    
+    console.log(data);
+    console.log(editDataJourneyID);
+    console.log(editDataJourneyTitle);
+    console.log(editDataJourneyStartDate);
+    console.log(editDataJourneyEndDate);
+    console.log(editDataJourneyDesc);
+
+    this.setState( {journeyIdToUpdate: editDataJourneyID} );
+    this.setState( {journeyTitleToUpdate: editDataJourneyTitle} );
+    this.setState( {journeyStartDateToUpdate: editDataJourneyStartDate} );
+    this.setState( {journeyEndDateToUpdate: editDataJourneyEndDate} );
+    this.setState( {journeyJourneyDescToUpdate: editDataJourneyDesc} );
+
+    console.log("This is in the object to use for data to update:")
+    console.log("This is updateJourneyDate.journeyIdToUpdate:", this.state.journeyIdToUpdate);
+    console.log("This is updateJourneyData.journeyTitleToUpdate:", this.state.journeyTitleToUpdate);
+    console.log("This is updateJourneyData.journeyStartDateToUpdate:", this.state.journeyStartDateToUpdate);
+    console.log("This is updateJourneyData.journeyEndDateToUpdate:", this.state.journeyEndDateToUpdate);
+    console.log("This is updateJourneyData.journeyJourneyDescToUpdate:", this.state.journeyJourneyDescToUpdate);
+
+
+
+
+    this.toggleModal(); // toggles modal open
+    console.log("The value of modal toggle is: ", this.state.modalClosed);
+
   };  //  end of editJourneyModal
+
+
+
+
+  // **********  TOGGLES modalClosed true/false  **********
+  toggleModal() {
+    console.log("Toggling modal!");
+    this.setState( { modalClosed: (!this.state.modalClosed) } );
+    console.log("Modal is closed?:", this.state.modalClosed);
+  };
+
+
+  // **********  UPDATE USER'S JOURNEYS  **********
+  saveJourneyUpdate() {
+    console.log("NOT FUNCTIONAL - pretend to update journey");
+    // TODO update state
+    // TODO get variables for fetch
+    // TODO fetch to Update/PUT
+    // TODO .then( () => this.toggleModal() );
+    // TODO .then( () => this.forceRender() );
+
+  };  //  end of this.saveJourneyUpdate
 
 
 
@@ -140,8 +206,8 @@ class ViewMyJourneys extends React.Component {
 
     console.log("**********   THIS IS VIEW MY JOURNEYS")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
-    console.log("Username: ", this.props.username);
-    console.log("User is admin?", this.props.userIsAdmin)
+    console.log("this.props.username: ", this.props.username);
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
     return (
       <div>
@@ -158,14 +224,13 @@ class ViewMyJourneys extends React.Component {
                     <CardText>{potato.journeyDesc}</CardText>
 
                     <Button color="info" size="sm"
-                            type="submit"
                             onClick={this.writeChapterModal} value={potato.id}>
                             Write Chapter
                     </Button>
 
                     <Button color="warning" size="sm"
-                            type="submit"
-                            onClick={this.editJourneyModal} value={potato.id}>
+                            onClick={() => this.editJourneyModal(potato)}
+                    >
                             Edit Journey
                     </Button>
 
@@ -230,7 +295,7 @@ class ViewMyJourneys extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label className="Label" htmlFor="journeyDesc">*Journey Title</Label>
+              <Label className="Label" htmlFor="journeyDesc">*Journey Description</Label>
               <textarea rows="6" cols="50"
                       className="Input"
                       id="journeyDesc"
@@ -250,6 +315,95 @@ class ViewMyJourneys extends React.Component {
 
           </Form>
         </div>
+
+
+        <div>
+          <Modal isOpen={this.state.modalClosed} toggle={this.state.toggleModal} className="editJourneyModal">
+            <ModalHeader toggle={this.toggleModal}>Edit Journey</ModalHeader>
+            <ModalBody>
+              <Form className="editJourneyForm" onSubmit={this.saveJourneyUpdate} type="submit">
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editJourneyTitle">
+                          *Journey Title
+                  </Label>
+                  <Input  className="Input"
+                          id="editJourneyTitle"
+                          name="editJourneyTitle"
+                          type="text"
+                          value={this.state.journeyTitleToUpdate}
+                          onChange={ (event) => this.setState (
+                              {updateJourneyTitle: event.target.value}
+                            )
+                          }
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editJourneyStartDate">
+                          *Journey Start Date
+                  </Label>
+                  <Input  className="Input"
+                          id="editJourneyStartDate"
+                          name="editJourneyStartDate"
+                          type="date"
+                          value={this.state.journeyStartDateToUpdate}
+                          onChange={ (event) => this.setState (
+                              {updateJourneyStartDate: event.target.value}
+                            )
+                          }
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editJourneyEndDate">
+                          Journey End Date
+                  </Label>
+                  <Input  className="Input"
+                          id="editJourneyEndDate"
+                          name="editJourneyEndDate"
+                          type="date"
+                          value={this.state.journeyEndDateToUpdate}
+                          onChange={ (event) => this.setState (
+                              {updateJourneyEndDate: event.target.value}
+                            )
+                          }
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editJourneyDesc">
+                          *Journey Description
+                  </Label>
+                  <textarea rows="6" cols="50"  
+                          className="Input"
+                          id="editJourneyDesc"
+                          name="editJourneyDesc"
+                          type="text"
+                          value={this.state.journeyJourneyDescToUpdate}
+                          onChange={ (event) => this.setState (
+                              {updateJourneyDesc: event.target.value}
+                            )
+                          }
+                  />
+                </FormGroup>
+
+              </Form>
+            </ModalBody>
+            <ModalFooter>
+              <p>* Fields are required.</p>
+              <Button className="Button" color="primary" type="submit">Save Updates</Button>{' '}
+            </ModalFooter>
+          </Modal>
+        </div>
+
+
+
+
+
 
 
       </div>

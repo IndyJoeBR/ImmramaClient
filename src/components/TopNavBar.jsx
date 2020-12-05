@@ -21,6 +21,9 @@ import ViewJourneys from "./ViewJourneys";
 import ViewMyJourneys from "./MyJourneys";
 import About from '../sections/about';
 import ContactUs from '../sections/contactUs';
+import ViewChapters from "./ViewChapters";
+import Account from "./Account";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 
 class TopNavBar extends React.Component {
@@ -39,15 +42,6 @@ class TopNavBar extends React.Component {
 
   toggleNavbar () {
     this.setState( {navbarIsOpen: (!this.state.navbarIsOpen)} )
-
-/*    if(this.navbarIsOpen === true) {
-      console.log("closing navbar");
-      this.setState( {navbarIsOpen: false} );
-    } else {
-      this.setState( {navbarIsOpen: true} );
-      console.log("opening navbar");
-    }
-*/
   };
 
 
@@ -89,8 +83,9 @@ class TopNavBar extends React.Component {
 
     console.log("**********   THIS IS THE NAVBAR   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
-    console.log("Username: ", this.props.username);
-    console.log("User is admin?", this.props.userIsAdmin)
+    console.log("this.props.username: ", this.props.username);
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
+
 
 
     return (
@@ -102,7 +97,7 @@ class TopNavBar extends React.Component {
           Immrama</NavbarBrand>
 
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={!this.state.navbarIsOpen} navbar>
+          <Collapse isOpen={this.state.navbarIsOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
                 <Button color="dark"><Link to="/">Home</Link></Button>{' '}
@@ -133,6 +128,9 @@ class TopNavBar extends React.Component {
                   <DropdownItem>
                     <Button color="warning" size="sm" onClick={this.changeUserPassword} >Change Password</Button>
                   </DropdownItem>
+                  <DropdownItem>
+                  <Button color="warning" size="sm" ><Link to="/Account">Account Details</Link></Button>{' '}
+                  </DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
           </Collapse>
@@ -155,11 +153,32 @@ class TopNavBar extends React.Component {
                 userIsAdmin={this.props.userIsAdmin}
               />
             </Route>
+            <Route exact path="/ViewChapters">
+              <ViewChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
+            </Route>
             <Route exact path="/Sections/About">
               <About />
             </Route>
             <Route exact path="/Sections/ContactUs">
               <ContactUs />
+            </Route>
+            <Route exact path="/Account">
+              <Account 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
+            </Route>
+            <Route exact path="/ChangePassword">
+              <ChangePasswordModal 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
             </Route>
             <Route exact path="/">
               <Home 
@@ -169,6 +188,14 @@ class TopNavBar extends React.Component {
               />
             </Route>
           </Switch>
+
+
+
+
+
+
+
+
 
       </div>
 

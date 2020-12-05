@@ -77,8 +77,8 @@ class ViewJourneys extends React.Component {
 
     console.log("**********   THIS IS VIEW ALL JOURNEYS   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
-    console.log("Username: ", this.props.username);
-    console.log("User is admin?", this.props.userIsAdmin)
+    console.log("this.props.username: ", this.props.username);
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
 
     return (
@@ -88,7 +88,7 @@ class ViewJourneys extends React.Component {
               <Card className="journeyCard">
                 <CardBody className="journeyCardBody">
                   <CardTitle tag="h5">{potato.journeyTitle}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">{potato.JourneyUsername}</CardSubtitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted" >{potato.JourneyUsername}</CardSubtitle>
                   <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
                   <CardText>{potato.journeyEndDate}</CardText>
                   <CardText>{potato.journeyDesc}</CardText>
@@ -108,8 +108,3 @@ class ViewJourneys extends React.Component {
 };  //  end of ViewJourneys class
 
 export default ViewJourneys;
-
-
-/*
-  
-*/

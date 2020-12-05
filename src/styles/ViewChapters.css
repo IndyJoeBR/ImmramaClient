@@ -1,0 +1,11 @@
+.chapterCard {
+  background: transparent;
+  border: thin solid black;
+  width: 40vw;
+  height: auto;
+  margin: 40px;
+}
+
+.chapterCardBody {
+  margin: 20px;
+}

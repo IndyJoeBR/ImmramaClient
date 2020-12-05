@@ -1,6 +1,8 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import {  Button, Card, CardTitle, CardSubtitle, 
+          CardText, CardBody } from 'reactstrap';
 import APIURL from "../helpers/environment";
+import "../styles/MyJourneys.css"
 
 
 class ViewChapters extends React.Component {
@@ -9,12 +11,22 @@ class ViewChapters extends React.Component {
     super(props);
   };    //  end of constructor
 
-
   componentDidMount() {
     console.log("View Chapters mounted.")
   };
 
+
+
+
+
+
+
   render () {
+
+    console.log("**********   THIS IS THE VIEW CHAPTERS")
+    console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
+    console.log("this.props.username: ", this.props.username);
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
     return (
       <div>

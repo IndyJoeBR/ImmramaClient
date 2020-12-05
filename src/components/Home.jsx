@@ -12,8 +12,8 @@ class Home extends React.Component {
 
     console.log("**********   THIS IS THE HOME   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
-    console.log("Username: ", this.props.username);
-    console.log("User is admin?", this.props.userIsAdmin)
+    console.log("this.props.username: ", this.props.username);
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
     return (
       <div className="App">
