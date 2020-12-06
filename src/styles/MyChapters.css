@@ -9,3 +9,15 @@
 .chapterCardBody {
   margin: 20px;
 }
+
+
+
+
+.createChapterForm {
+  width: 50vw;
+}
+
+.Label {
+  word-wrap: normal;
+  font-size: 20px;
+}

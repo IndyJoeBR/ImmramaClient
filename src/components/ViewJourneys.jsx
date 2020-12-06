@@ -3,6 +3,8 @@ import {  Button, Card, CardTitle, CardSubtitle,
           CardText, CardBody } from 'reactstrap';
 import APIURL from "../helpers/environment";
 import "../styles/MyJourneys.css"
+import { Link, Route, Switch } from "react-router-dom";
+import ViewChapters from "./ViewChapters";
 
 // *****  View Journeys requires no validation as it
 //        is available to all logged in users and
@@ -15,21 +17,32 @@ class ViewJourneys extends React.Component {
       this.autoFetchAllJourneys = this.autoFetchAllJourneys.bind(this);
       this.deleteThisJourney = this.deleteThisJourney.bind(this);
       this.forceRender = this.forceRender.bind(this);
+      this.readChapters = this.readChapters.bind(this);
 
     this.state = {
       deleteBtnStyle: false,
+      journeyToView: 9,     // FIX THIS - SHOULD BE SET from potato.id
       allJourneys: []
     };
 
   };    //  end of constructor
 
-
+  // fetches all Journeys when page opens
   componentDidMount() {
     console.log("View All Journeys mounted.");
-    this.autoFetchAllJourneys();  // fetches all Journeys when page opens
+    this.autoFetchAllJourneys();  
   };
 
 
+  // **********   FORCE RE-RENDER   **********
+  // This needed when a journey is CRUDed because no
+  //    state variables are involved.
+  forceRender() {
+    this.autoFetchAllJourneys();
+    console.log("Re-render after journey delete.")
+  };
+
+  
   // **********   AUTO FETCH ALL JOURNEYS ON-MOUNT   **********
   autoFetchAllJourneys () {
 
@@ -44,13 +57,14 @@ class ViewJourneys extends React.Component {
   };  //  end of autoFetch for all journeys
 
 
-  // **********   FORCE RE-RENDER   **********
-  // This needed when a journey is CRUDed because no
-  //    state variables are involved.
-  forceRender() {
-    this.autoFetchAllJourneys();
-    console.log("Re-render after journey delete.")
-  };
+  
+
+//  BROKEN... need to pass journeyToView as PROPS
+  // **********   READ JOURNEY'S CHAPTERS   **********
+  readChapters(event) {
+    this.setState( { journeyToView: event.target.value } );
+  } //  end of readChapters
+
 
 
   // **********   DELETE JOURNEY   **********
@@ -78,7 +92,8 @@ class ViewJourneys extends React.Component {
     console.log("**********   THIS IS VIEW ALL JOURNEYS   **********")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
     console.log("this.props.username: ", this.props.username);
-    console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
+    console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
+    console.log("this.state.journeyToView:", this.state.journeyToView);
 
 
     return (
@@ -92,6 +107,16 @@ class ViewJourneys extends React.Component {
                   <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
                   <CardText>{potato.journeyEndDate}</CardText>
                   <CardText>{potato.journeyDesc}</CardText>
+
+                  <Button color="info" size="sm"
+                          value={potato.id}
+                          onClick={() => this.setState( { journeyToView: potato.id } )}
+                  >
+                    <Link to="/ViewChapters">
+                          Read Chapters
+                    </Link>
+                  </Button>
+
                   {
                     this.props.userIsAdmin ?
                     <Button color="danger" size="sm" onClick={this.deleteThisJourney} value={potato.id}>Delete</Button> :
@@ -101,6 +126,28 @@ class ViewJourneys extends React.Component {
               </Card>
             </div>
           )}
+
+
+
+          <Switch>
+            <Route exact path="/ViewChapters">
+              <ViewChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+                journeyToView={this.state.journeyToView}
+              />
+            </Route>
+          </Switch>
+
+
+
+
+
+
+
+
+
       </div>
 
     );  //  end of return

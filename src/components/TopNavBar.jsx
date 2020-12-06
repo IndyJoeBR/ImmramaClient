@@ -19,6 +19,7 @@ import ViewMyJourneys from "./MyJourneys";
 import About from '../sections/about';
 import ContactUs from '../sections/contactUs';
 import ViewChapters from "./ViewChapters";
+import ViewMyChapters from "./MyChapters";
 import Account from "./Account";
 import ChangePasswordModal from "./ChangePasswordModal";
 
@@ -92,12 +93,15 @@ class TopNavBar extends React.Component {
                   </DropdownToggle>
 
                 <DropdownMenu right>
-                  <DropdownItem>
-                    <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
-                  </DropdownItem>
+
                   <DropdownItem>
                   <Button color="warning" size="sm" ><Link to="/Account">Account Details</Link></Button>{' '}
                   </DropdownItem>
+
+                  <DropdownItem>
+                    <Button color="danger" size="sm" onClick={this.immramaLogout} >Logout</Button>
+                  </DropdownItem>
+                  
                 </DropdownMenu>
             </UncontrolledDropdown>
           </Collapse>
@@ -122,6 +126,13 @@ class TopNavBar extends React.Component {
             </Route>
             <Route exact path="/ViewChapters">
               <ViewChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+              />
+            </Route>
+            <Route exact path="/ViewMyChapters">
+              <ViewMyChapters 
                 userIsLoggedIn={this.props.userIsLoggedIn}
                 username={this.props.username}
                 userIsAdmin={this.props.userIsAdmin}

@@ -63,10 +63,9 @@ class App extends React.Component {
 
   render () {
 
-
-
     return (
       <div className="App">
+
         <Router>
         {this.state.userIsLoggedIn ?
           <div>
@@ -98,6 +97,9 @@ class App extends React.Component {
           
           <Footer />
         </Router>
+
+
+
       </div>
 
     );  //  end of return

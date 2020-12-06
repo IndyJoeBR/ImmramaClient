@@ -4,6 +4,8 @@ import {  Button, Form, Input, Label, FormGroup,
           Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import APIURL from "../helpers/environment";
 import "../styles/MyJourneys.css"
+import { Link, Route, Switch } from "react-router-dom";
+import ViewMyChapters from "./MyChapters";
 
 // *****  View Journeys requires no validation as it
 //        is available to all logged in users and
@@ -18,9 +20,9 @@ class ViewMyJourneys extends React.Component {
     this.editJourneyModal = this.editJourneyModal.bind(this);
     this.deleteMyJourney = this.deleteMyJourney.bind(this);
     this.forceRender = this.forceRender.bind(this);
-    this.writeChapterModal = this.writeChapterModal.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.saveJourneyUpdate = this.saveJourneyUpdate.bind(this);
+    this.collectDataForMyJourneys = this.collectDataForMyJourneys.bind(this);
 
 
     this.state = {
@@ -33,12 +35,17 @@ class ViewMyJourneys extends React.Component {
       journeyStartDateToUpdate: '',
       journeyEndDateToUpdate: '',
       journeyJourneyDescToUpdate: '',
-      modalClosed: false,
-      updateJourneyTitle: '',
-      updateJourneyStartDate: null,
-      updateJourneyEndDate: '',
-      updateJourneyDesc: '',
-      userJourneys: []
+      modalClosed: false,                     // open/close edit journey modal
+      updateJourneyTitle: '',                 // Journey data for use in updating in modal
+      updateJourneyStartDate: null,               //
+      updateJourneyEndDate: '',                   //
+      updateJourneyDesc: '',                      //
+      journeyUsernameForMyJourneys: '',       // Journey data to send to My Chapters
+      journeyTitleForMyJourneys: '',              //  
+      journeyIdForMyJourneys: '',                 //
+      journeyStartDateForMyJourneys: '',          //  
+      journeyEndDateForMyJourneys: '',            //
+      userJourneys: []                        // for the cards .map method
     };
 
   };    //  end of constructor
@@ -56,14 +63,6 @@ class ViewMyJourneys extends React.Component {
     this.autoFetchUserJourneys();
     console.log("---===< Re-render after CRUD. >===---")
   };
-
-
-
-  // **********   OPEN WRITE CHAPTER MODAL   **********
-  writeChapterModal() {
-    console.log("Go here to open a modal and write a new chapter.");
-  } //  end of writeChapterModal
-
 
 
   // **********   AUTO FETCH USER'S JOURNEYS ON-MOUNT   **********
@@ -179,6 +178,26 @@ class ViewMyJourneys extends React.Component {
   };  //  end of this.saveJourneyUpdate
 
 
+  // **********  DATA TO PASS TO VIEW JOURNEY'S CHAPTERS  **********
+  collectDataForMyJourneys(journeyData) {
+    console.log("Attaching journey data to state variables for My Chapters");
+
+    let id = journeyData.id;
+    let title = journeyData.journeyTitle;
+    let username = journeyData.JourneyUsername;
+    let startDate = journeyData.journeyStartDate.slice(0,9);
+    let endDate = journeyData.journeyEndDate;
+    
+    this.setState( {journeyIdForMyJourneys: id } );
+    this.setState( {journeyTitleForMyJourneys: title } );
+    this.setState( {journeyUsernameForMyJourneys: username } );
+    this.setState( {journeyStartDateForMyJourneys: startDate } );
+    this.setState( {journeyEndDateForMyJourneys: endDate } );
+
+
+  } //  end of collectDataForMyJourneys
+
+
 
 
   // **********  DELETE USER'S JOURNEYS  **********
@@ -209,6 +228,14 @@ class ViewMyJourneys extends React.Component {
     console.log("this.props.username: ", this.props.username);
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
+    console.log("Journey data to send to My Chapters")
+    console.log(this.state.journeyData);
+    console.log(this.state.journeyIdForMyJourneys);
+    console.log(this.state.journeyTitleForMyJourneys);
+    console.log(this.state.journeyUsernameForMyJourneys);
+    console.log(this.state.journeyStartDateForMyJourneys);
+    console.log(this.state.journeyEndDateForMyJourneys);
+
     return (
       <div>
 
@@ -224,14 +251,17 @@ class ViewMyJourneys extends React.Component {
                     <CardText>{potato.journeyDesc}</CardText>
 
                     <Button color="info" size="sm"
-                            onClick={this.writeChapterModal} value={potato.id}>
-                            Write Chapter
+                            value={potato.id}
+                            onClick={() => this.collectDataForMyJourneys(potato)}
+                    >
+                      <Link to="/ViewMyChapters">
+                          View Chapters
+                      </Link>
                     </Button>
 
                     <Button color="warning" size="sm"
                             onClick={() => this.editJourneyModal(potato)}
-                    >
-                            Edit Journey
+                    >       Edit Journey
                     </Button>
 
                     <Button color="danger" size="sm"
@@ -401,7 +431,16 @@ class ViewMyJourneys extends React.Component {
         </div>
 
 
-
+        <Switch>
+            <Route exact path="/ViewMyChapters">
+              <ViewMyChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+                journeyToView={this.state.journeyToView}
+              />
+            </Route>
+          </Switch>
 
 
 
