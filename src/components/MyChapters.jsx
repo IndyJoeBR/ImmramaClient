@@ -29,8 +29,7 @@ class ViewMyChapters extends React.Component {
       chapterShortDesc: '',         //
       chapterStory: '',             //
       chapterImage: '',             //
-      chapterVideo: '',             //
-      chapterJourneyId: '',         //
+      chapterVideo: ''
     };
 
 
@@ -71,12 +70,48 @@ class ViewMyChapters extends React.Component {
   createChapterSubmit(event) {
     event.preventDefault();
 
-    console.log("Ready to create a new chapter.")
+    // userId is taken from validate session
+    let journeyId = this.state.journeyToView;
+    let chapterTitle = this.state.chapterTitle;
+    let chapterDate = this.state.chapterDate;
+    let chapterShortDesc = this.state.chapterShortDesc;
+    let chapterStory = this.state.chapterStory;
+    let chapterImage = this.state.chapterImage;
+    let chapterVideo = this.state.chapterVideo;
+    let localStorageToken = localStorage.getItem('token');  // token from localstorage
+    
+    console.log("Ready to create a new chapter.");
+    console.log("journeyId:", journeyId);
+    console.log("chapterTitle:", chapterTitle);
+    console.log("chapterDate:", chapterDate);
+    console.log("chapterShortDesc:", chapterShortDesc);
+    console.log("chapterStory:", chapterStory);
+    console.log("chapterImage:", chapterImage);
+    console.log("chapterVideo:", chapterVideo);
+
+
+    fetch(`${APIURL}/chapter/chapterCreate`, {
+      method: 'POST',
+      headers: new Headers( {'Content-Type': 'application/json', 'Authorization': localStorageToken } ),
+      body: JSON.stringify({ chapter: { 
+        journeyId: journeyId,
+        chapterTitle: chapterTitle,
+        chapterDate: chapterDate,
+        chapterShortDesc: chapterShortDesc,
+        chapterStory: chapterStory,
+        chapterImage: chapterImage,
+        chapterVideo: chapterVideo
+      }}),
+    })
+    .then( (response) => response.json() )
+    .then( (data) => console.log("New Chapter:", data) )
+    .then( () => this.forceRender() )
+    .catch( (error) => console.log(error) );
   
   };  //  end of createChapterSubmit
 
 
-  // **********  OPEN EDIT JOURNEY MODAL  **********
+  // **********  OPEN EDIT CHAPTER MODAL  **********
   editChapterModal(data) {
     console.log("Updating user's journey");
 
@@ -159,7 +194,7 @@ class ViewMyChapters extends React.Component {
       <div>
 
         <h2>Journey Title Here</h2>
-        <h4>({this.props.username})</h4>
+        <h4>( {this.props.username} )</h4>
 
           { this.state.allChapters.map ( (pawpaw) =>
             <div>
@@ -185,113 +220,115 @@ class ViewMyChapters extends React.Component {
           )}
 
 
-
           <h3>Create a new chapter here.</h3>
-          <Form className="createChapterForm" onSubmit={this.createChapterSubmit} type="submit">
+          <div className="createJourneyBody">
+            
+            <Form className="createChapterForm" onSubmit={this.createChapterSubmit} type="submit">
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chapterTitle">*Chapter Title</Label>
-              <Input  className="Input"
-                      id="chapterTitle"
-                      name="chapterTitle"
-                      type="text"
-                      placeholder="What is the title of this chapter?"
-                      value={this.state.chapterTitle}
-                      onChange={ (event) => this.setState (
-                          {chapterTitle: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterTitle">*Chapter Title</Label>
+                <Input  className="Input"
+                        id="chapterTitle"
+                        name="chapterTitle"
+                        type="text"
+                        placeholder="What is the title of this chapter?"
+                        value={this.state.chapterTitle}
+                        onChange={ (event) => this.setState (
+                            {chapterTitle: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chaptertDate">*Chapter Date</Label>
-              <Input  className="Input"
-                      id="chaptertDate"
-                      name="chaptertDate"
-                      type="date"
-                      placeholder="On what day did this chapter take place? (yyyy-mm-dd required)"
-                      value={this.state.chaptertDate}
-                      onChange={
-                        (event) => this.setState (
-                          {chaptertDate: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterDate">*Chapter Date</Label>
+                <Input  className="Input"
+                        id="chapterDate"
+                        name="chapterDate"
+                        type="date"
+                        placeholder="On what day did this chapter take place? (yyyy-mm-dd required)"
+                        value={this.state.chapterDate}
+                        onChange={
+                          (event) => this.setState (
+                            {chapterDate: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chapterShortDesc">*Chapter Short Description</Label>
-              <textarea rows="6" cols="50"
-                      className="Input"
-                      id="chapterShortDesc"
-                      name="chapterShortDesc"
-                      type="text"
-                      placeholder="In <300 characters, describe the chapter.  (This can be a short summary or even just be a chapter number.)"
-                      value={this.state.chapterShortDesc}
-                      onChange={
-                        (event) => this.setState (
-                          {chapterShortDesc: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterShortDesc">*Chapter Short Description</Label>
+                <textarea rows="6" cols="50"
+                        className="Input"
+                        id="chapterShortDesc"
+                        name="chapterShortDesc"
+                        type="text"
+                        placeholder="In <300 characters, describe the chapter.  (This can be a short summary or even just be a chapter number.)"
+                        value={this.state.chapterShortDesc}
+                        onChange={
+                          (event) => this.setState (
+                            {chapterShortDesc: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chapterStory">*Chapter Story</Label>
-              <textarea rows="10" cols="70"
-                      className="Input"
-                      id="chapterStory"
-                      name="chapterStory"
-                      type="text"
-                      placeholder="Relate the story here in under 3000 characters.  (On average that is about 500 words or one page.)"
-                      value={this.state.chapterStory}
-                      onChange={
-                        (event) => this.setState (
-                          {chapterStory: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterStory">*Chapter Story</Label>
+                <textarea rows="10" cols="120"
+                        className="Input"
+                        id="chapterStory"
+                        name="chapterStory"
+                        type="text"
+                        placeholder="Relate the story here in under 3000 characters.  (On average that is about 500 words or one page.)"
+                        value={this.state.chapterStory}
+                        onChange={
+                          (event) => this.setState (
+                            {chapterStory: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chapterImage">Chapter Image</Label>
-              <Input  className="Input"
-                      id="chapterImage"
-                      name="chapterImage"
-                      type="text"
-                      placeholder="An image uploaded for this chapter."
-                      value={this.state.chapterImage}
-                      onChange={ (event) => this.setState (
-                          {chapterImage: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterImage">Chapter Image</Label>
+                <Input  className="Input"
+                        id="chapterImage"
+                        name="chapterImage"
+                        type="text"
+                        placeholder="An image uploaded for this chapter."
+                        value={this.state.chapterImage}
+                        onChange={ (event) => this.setState (
+                            {chapterImage: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
-            <FormGroup>
-              <Label className="Label" htmlFor="chapterVideo">Chapter Video</Label>
-              <Input  className="Input"
-                      id="chapterVideo"
-                      name="chapterVideo"
-                      type="text"
-                      placeholder="-=> Video Not Currently Supported <=-  (But feel free to paste in a URL for storage)."
-                      value={this.state.chapterVideo}
-                      onChange={ (event) => this.setState (
-                          {chapterVideo: event.target.value}
-                        )
-                      }
-              />
-            </FormGroup>
-
-
-
-            <p>* Fields are required.</p>
-            <Button className="Button" type="submit">Record Chapter</Button>
-
-          </Form>
+              <FormGroup>
+                <Label className="Label" htmlFor="chapterVideo">Chapter Video</Label>
+                <Input  className="Input"
+                        id="chapterVideo"
+                        name="chapterVideo"
+                        type="text"
+                        placeholder="Video Not Currently Supported - But feel free use it for URL for storage
+                        ."
+                        value={this.state.chapterVideo}
+                        onChange={ (event) => this.setState (
+                            {chapterVideo: event.target.value}
+                          )
+                        }
+                />
+              </FormGroup>
 
 
+
+              <p>* Fields are required.</p>
+              <Button className="Button" type="submit">Record Chapter</Button>
+
+            </Form>
+
+          </div>
 
 
 

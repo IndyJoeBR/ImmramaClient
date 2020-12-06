@@ -26,20 +26,20 @@ class ViewMyJourneys extends React.Component {
 
 
     this.state = {
-      journeyTitle: '',
-      journeyStartDate: null,
-      journeyEndDate: '',
-      journeyDesc: '',
-      journeyIdToUpdate: '',
-      journeyTitleToUpdate: '',
-      journeyStartDateToUpdate: '',
-      journeyEndDateToUpdate: '',
-      journeyJourneyDescToUpdate: '',
+      journeyTitle: '',                       // Journey data for CREATE
+      journeyStartDate: null,                     //
+      journeyEndDate: '',                         //
+      journeyDesc: '',                            //
+      journeyIdToUpdate: '',                  // Journey data to display for update
+      journeyTitleToUpdate: '',                   //
+      journeyStartDateToUpdate: '',               //
+      journeyEndDateToUpdate: '',                 //
+      journeyJourneyDescToUpdate: '',             //
       modalClosed: false,                     // open/close edit journey modal
-      updateJourneyTitle: '',                 // Journey data for use in updating in modal
-      updateJourneyStartDate: null,               //
-      updateJourneyEndDate: '',                   //
-      updateJourneyDesc: '',                      //
+      updatedJourneyTitle: '',                 // Journey data for use in updating in modal
+      updatedJourneyStartDate: null,               //
+      updatedJourneyEndDate: '',                   //
+      updatedJourneyDesc: '',                      // - not currently used -
       journeyUsernameForMyJourneys: '',       // Journey data to send to My Chapters
       journeyTitleForMyJourneys: '',              //  
       journeyIdForMyJourneys: '',                 //
@@ -50,7 +50,7 @@ class ViewMyJourneys extends React.Component {
 
   };    //  end of constructor
 
-  //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****
+  //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****   -=> COMPLETE <=-
   componentDidMount() {
     console.log("View My Journeys mounted.");
     this.autoFetchUserJourneys();
@@ -65,7 +65,7 @@ class ViewMyJourneys extends React.Component {
   };
 
 
-  // **********   AUTO FETCH USER'S JOURNEYS ON-MOUNT   **********
+  // **********   AUTO FETCH USER'S JOURNEYS ON-MOUNT   **********   -=> COMPLETE <=-
   autoFetchUserJourneys () {
 
     let localStorageToken = localStorage.getItem('token');
@@ -81,7 +81,7 @@ class ViewMyJourneys extends React.Component {
   };  //  end of autoFetch
 
 
-  // **********  CREATE A NEW JOURNEY  **********
+  // **********  CREATE A NEW JOURNEY  **********   -=> COMPLETE <=-
   createJourneySubmit(event) {
     event.preventDefault();
 
@@ -111,43 +111,53 @@ class ViewMyJourneys extends React.Component {
     .then( () => this.forceRender() )
     .catch( (error) => console.log(error) );
 
+
+    // Clears fields in Create Journey form after use
+    this.setState( { journeyTitle: '' } );
+    this.setState( { journeyStartDate: '' } );
+    this.setState( { journeyEndDate: '' } );
+    this.setState( { journeyDesc: '' } );
+
+
+
   };  //  end of createJourneySubmit
 
 
 
 
 
-  // **********  OPEN EDIT JOURNEY MODAL  **********
-  editJourneyModal(data) {
-    console.log("Updating user's journey");
+  //      **********  OPEN EDIT JOURNEY MODAL  **********
+  // Extracts current values for a Journey's card and puts
+  // them in a state variable to display in the edit modal
+  // as a reference for the user of the current value
+  editJourneyModal(potato) {
 
-    let editDataJourneyID = data.id;
-    let editDataJourneyTitle = data.journeyTitle;
-    let editDataJourneyStartDate = data.journeyStartDate;
-    let editDataJourneyEndDate = data.journeyEndDate;
-    let editDataJourneyDesc = data.journeyDesc;
-    
-    console.log(data);
-    console.log(editDataJourneyID);
-    console.log(editDataJourneyTitle);
-    console.log(editDataJourneyStartDate);
-    console.log(editDataJourneyEndDate);
-    console.log(editDataJourneyDesc);
+    console.log("___editJourneyModal: extract current values to display in modal.___")
 
-    this.setState( {journeyIdToUpdate: editDataJourneyID} );
-    this.setState( {journeyTitleToUpdate: editDataJourneyTitle} );
-    this.setState( {journeyStartDateToUpdate: editDataJourneyStartDate} );
-    this.setState( {journeyEndDateToUpdate: editDataJourneyEndDate} );
-    this.setState( {journeyJourneyDescToUpdate: editDataJourneyDesc} );
-
-    console.log("This is in the object to use for data to update:")
-    console.log("This is updateJourneyDate.journeyIdToUpdate:", this.state.journeyIdToUpdate);
-    console.log("This is updateJourneyData.journeyTitleToUpdate:", this.state.journeyTitleToUpdate);
-    console.log("This is updateJourneyData.journeyStartDateToUpdate:", this.state.journeyStartDateToUpdate);
-    console.log("This is updateJourneyData.journeyEndDateToUpdate:", this.state.journeyEndDateToUpdate);
-    console.log("This is updateJourneyData.journeyJourneyDescToUpdate:", this.state.journeyJourneyDescToUpdate);
+    //               DELETE THESE ONCE WORKING
+    console.log("Journey ID to update:", potato.id);
+    console.log("Journey title to update:", potato.journeyTitle);
+    console.log("Journey start to update:", potato.journeyStartDate);
+    console.log("Journey end to update:", potato.journeyEndDate);
+    console.log("Journey end to update:", potato.journeyDesc);
+    //
 
 
+    this.setState( { journeyIdToUpdate: potato.id } );
+    this.setState( { journeyTitleToUpdate: potato.journeyTitle } );
+    this.setState( { journeyStartDateToUpdate: potato.journeyStartDate } );
+    this.setState( { journeyEndDateToUpdate: potato.journeyEndDate } );
+    this.setState( { journeyJourneyDescToUpdate: potato.journeyDesc } );
+
+
+    //               DELETE THESE ONCE WORKING
+    console.log("These are probably blank because of being SLOW!!!!")
+    console.log("Journey ID state update:", this.state.journeyIdToUpdate);
+    console.log("Journey Title state update:", this.state.journeyTitleToUpdate);
+    console.log("Journey Start state update:", this.state.journeyStartDateToUpdate);
+    console.log("Journey End state update:", this.state.journeyEndDateToUpdate);
+    console.log("Journey Desc state update:", this.state.journeyJourneyDescToUpdate);
+    //
 
 
     this.toggleModal(); // toggles modal open
@@ -158,7 +168,7 @@ class ViewMyJourneys extends React.Component {
 
 
 
-  // **********  TOGGLES modalClosed true/false  **********
+  // **********  TOGGLES modalClosed true/false  **********   -=> COMPLETE <=-
   toggleModal() {
     console.log("Toggling modal!");
     this.setState( { modalClosed: (!this.state.modalClosed) } );
@@ -166,19 +176,79 @@ class ViewMyJourneys extends React.Component {
   };
 
 
-  // **********  UPDATE USER'S JOURNEYS  **********
-  saveJourneyUpdate() {
-    console.log("NOT FUNCTIONAL - pretend to update journey");
-    // TODO update state
-    // TODO get variables for fetch
-    // TODO fetch to Update/PUT
+  //      **********  UPDATE USER'S JOURNEYS  **********
+  saveJourneyUpdate(event) {
+    event.preventDefault();
+    console.log("___ saveJourneyUpdate: Updating user's journey___");
+
+    let journeyEndDate = '';  // declare for use in IF
+    let localStorageToken = localStorage.getItem('token');
+
+    let journeyId = this.state.journeyIdToUpdate;
+    let journeyTitle = this.state.updatedJourneyTitle;
+    let journeyStartDate = this.state.updatedJourneyStartDate;
+
+    if (this.state.updatedJourneyEndDate) {
+      journeyEndDate = this.state.updatedJourneyEndDate;
+    } else {
+      journeyEndDate = "tbd";
+    }
+
+    //  NOTE: journeyDesc updates using ONLY the original data - no edits
+    let journeyDesc = this.state.journeyJourneyDescToUpdate;
+
+    //    ***   DELETE THESE ONCE UPDATE IS FUNCTIONING   ***
+    console.log("Journey ID for update:", journeyId);
+    console.log("Journey Title for update:", journeyTitle);
+    console.log("Journey Start for update:", journeyStartDate);
+    console.log("Journey End for update:", journeyEndDate);
+    console.log("Journey Desc for update:", journeyDesc);
+
+
+    fetch(`${APIURL}/journey/journeyUpdate/${journeyId}`, {
+      method: 'PUT',
+      headers: new Headers( { 'Content-Type': 'application/json',
+                              'Authorization': localStorageToken } ),
+      body: JSON.stringify({ journey: { 
+        journeyTitle: journeyTitle,
+        journeyStartDate: journeyStartDate,
+        journeyEndDate: journeyEndDate,
+        journeyDesc: journeyDesc
+      }}),
+    })
+    .then( (response) => response.json() )
+    .then( (data) => console.log("Updated Journey:", data) )
+    .then( () => this.toggleModal() )
+    .then( () => this.forceRender() )
+    .catch( (error) => console.log(error) );
+
+    // Clears current and updated fields in modal
+    this.setState( { journeyIdToUpdate: '' } );
+    this.setState( { journeyTitleToUpdate: '' } );
+    this.setState( { journeyStartDateToUpdate: '' } );
+    this.setState( { journeyEndDateToUpdate: '' } );
+    this.setState( { journeyJourneyDescToUpdate: '' } );
+
+    this.setState( { updatedJourneyTitle: '' } );
+    this.setState( { updatedJourneyStartDate: '' } );
+    this.setState( { updatedJourneyEndDate: '' } );
+    this.setState( { updatedJourneyDesc: '' } );
+
+
+
+
     // TODO .then( () => this.toggleModal() );
+    //this.toggleModal(); // toggles modal open
+    console.log("The value of modal toggle is: ", this.state.modalClosed);
+
     // TODO .then( () => this.forceRender() );
+    //this.autoFetchUserJourneys();
+
 
   };  //  end of this.saveJourneyUpdate
 
 
-  // **********  DATA TO PASS TO VIEW JOURNEY'S CHAPTERS  **********
+  //     **********  DATA TO PASS TO VIEW JOURNEY'S CHAPTERS  **********
   collectDataForMyJourneys(journeyData) {
     console.log("Attaching journey data to state variables for My Chapters");
 
@@ -193,14 +263,12 @@ class ViewMyJourneys extends React.Component {
     this.setState( {journeyUsernameForMyJourneys: username } );
     this.setState( {journeyStartDateForMyJourneys: startDate } );
     this.setState( {journeyEndDateForMyJourneys: endDate } );
-
-
   } //  end of collectDataForMyJourneys
 
 
 
 
-  // **********  DELETE USER'S JOURNEYS  **********
+  // **********  DELETE USER'S JOURNEYS  **********   -=> COMPLETE <=-
   deleteMyJourney(event) {
     event.preventDefault();
 
@@ -223,6 +291,7 @@ class ViewMyJourneys extends React.Component {
 /* ******************************************************************/
   render () {
 
+    // ANY/ALL OF THIS CAN BE DELETED WHEN NO LONGER IN USE
     console.log("**********   THIS IS VIEW MY JOURNEYS")
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
     console.log("this.props.username: ", this.props.username);
@@ -235,6 +304,13 @@ class ViewMyJourneys extends React.Component {
     console.log(this.state.journeyUsernameForMyJourneys);
     console.log(this.state.journeyStartDateForMyJourneys);
     console.log(this.state.journeyEndDateForMyJourneys);
+
+    console.log("Journey data from the modal to update FINALLY UPDATED!!!:")
+    console.log("Journey ID state update:", this.state.journeyIdToUpdate);
+    console.log("Journey Title state update:", this.state.journeyTitleToUpdate);
+    console.log("Journey Start state update:", this.state.journeyStartDateToUpdate);
+    console.log("Journey End state update:", this.state.journeyEndDateToUpdate);
+    console.log("Journey Desc state update:", this.state.journeyJourneyDescToUpdate);
 
     return (
       <div>
@@ -352,18 +428,20 @@ class ViewMyJourneys extends React.Component {
             <ModalHeader toggle={this.toggleModal}>Edit Journey</ModalHeader>
             <ModalBody>
               <Form className="editJourneyForm" onSubmit={this.saveJourneyUpdate} type="submit">
+                
                 <FormGroup>
                   <Label  className="modalLabel"
                           htmlFor="editJourneyTitle">
                           *Journey Title
                   </Label>
+                  <p className="editModalCurrentValue">Current: {this.state.journeyTitleToUpdate}</p>
                   <Input  className="Input"
                           id="editJourneyTitle"
                           name="editJourneyTitle"
                           type="text"
-                          value={this.state.journeyTitleToUpdate}
+                          value={this.state.updatedJourneyTitle}
                           onChange={ (event) => this.setState (
-                              {updateJourneyTitle: event.target.value}
+                              {updatedJourneyTitle: event.target.value}
                             )
                           }
                   />
@@ -374,13 +452,14 @@ class ViewMyJourneys extends React.Component {
                           htmlFor="editJourneyStartDate">
                           *Journey Start Date
                   </Label>
+                  <p className="editModalCurrentValue">Current: {this.state.journeyStartDateToUpdate}</p>
                   <Input  className="Input"
                           id="editJourneyStartDate"
                           name="editJourneyStartDate"
                           type="date"
-                          value={this.state.journeyStartDateToUpdate}
+                          value={this.state.updatedJourneyStartDate}
                           onChange={ (event) => this.setState (
-                              {updateJourneyStartDate: event.target.value}
+                              {updatedJourneyStartDate: event.target.value}
                             )
                           }
                   />
@@ -391,13 +470,14 @@ class ViewMyJourneys extends React.Component {
                           htmlFor="editJourneyEndDate">
                           Journey End Date
                   </Label>
+                  <p className="editModalCurrentValue">Current: {this.state.journeyEndDateToUpdate}</p>
                   <Input  className="Input"
                           id="editJourneyEndDate"
                           name="editJourneyEndDate"
                           type="date"
-                          value={this.state.journeyEndDateToUpdate}
+                          value={this.state.updatedJourneyEndDate}
                           onChange={ (event) => this.setState (
-                              {updateJourneyEndDate: event.target.value}
+                              {updatedJourneyEndDate: event.target.value}
                             )
                           }
                   />
@@ -406,27 +486,28 @@ class ViewMyJourneys extends React.Component {
                 <FormGroup>
                   <Label  className="modalLabel"
                           htmlFor="editJourneyDesc">
-                          *Journey Description
+                          Journey Description
                   </Label>
-                  <textarea rows="6" cols="50"  
+                  <p className="editModalCurrentValue">Current: {this.state.journeyJourneyDescToUpdate}</p>
+                  <textarea rows="3" cols="50"  
                           className="Input"
                           id="editJourneyDesc"
                           name="editJourneyDesc"
                           type="text"
-                          value={this.state.journeyJourneyDescToUpdate}
-                          onChange={ (event) => this.setState (
-                              {updateJourneyDesc: event.target.value}
-                            )
-                          }
+                          placeholder="Edit Journey Description is not currently available."
                   />
                 </FormGroup>
 
+                <Button className="Button" color="primary" type="submit">Save Updates</Button>{' '}
+
               </Form>
             </ModalBody>
+
             <ModalFooter>
-              <p>* Fields are required.</p>
-              <Button className="Button" color="primary" type="submit">Save Updates</Button>{' '}
+              <p className="modalFooterText">* Fields are required - may not be updated to blank.</p>
             </ModalFooter>
+
+
           </Modal>
         </div>
 

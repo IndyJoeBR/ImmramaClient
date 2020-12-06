@@ -17,4 +17,18 @@
 .Label {
   word-wrap: normal;
   font-size: 20px;
+  font-weight: bold;
+}
+
+.modalLabel {
+  font-weight: bold;
+}
+
+.editModalCurrentValue {
+  font-size: 14px;
+}
+
+.modalFooterText {
+  font-size: 14px;
+  color: red;
 }
