@@ -3,7 +3,9 @@ import { Container, Row, Col, Button, Form, Input, Label, FormGroup,
   Card, CardTitle, CardSubtitle, CardText, CardBody, 
   Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import APIURL from "../helpers/environment";
+import { storage } from "../Firebase";
 import "../styles/MyChapters.css"
+
 
 class ViewMyChapters extends React.Component {
 
@@ -16,11 +18,13 @@ class ViewMyChapters extends React.Component {
     this.createChapterSubmit = this.createChapterSubmit.bind(this);
     this.editChapterModal = this.editChapterModal.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
 
   // **********>>>>>   FIX journeyToView   <<<<<******************  
   // TODO - also get the Journey Title & username for the headline
     this.state = {
-      journeyToView: 34,      // hard coded for functionality
+      journeyToView: 34,      // hard coded for functionality 34
       deleteBtnStyle: false,
       modalClosed: false,
       allChapters: [],
@@ -28,8 +32,10 @@ class ViewMyChapters extends React.Component {
       chapterDate: '',              //
       chapterShortDesc: '',         //
       chapterStory: '',             //
-      chapterImage: '',             //
-      chapterVideo: ''
+      imageForUpload: null,         //    for firebase upload
+      chapterImage: '',             //    firebase url
+      videoForUpload: null,         //    for firebase upload
+      chapterVideo: ''              //    firebase url
     };
 
 
@@ -38,7 +44,10 @@ class ViewMyChapters extends React.Component {
   //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****
   componentDidMount() {
     console.log("View Journey's Chapters.");
+    console.log("This is the journeyToView:", this.state.journeyToView);
     this.autoFetchJourneysChapters(this.state.journeyToView);
+    console.log("This is journeyToView props: ", this.props.journeyToView);
+    console.log("This is all of state from MyJourneys:", this.props.state);
   };
 
     // **********   FORCE RE-RENDER   **********
@@ -158,6 +167,44 @@ class ViewMyChapters extends React.Component {
   };
 
 
+  // handles change in image state for image upload
+  handleChange(event) {
+    if (event.target.files[0]) {      // only chooses the first file of mutliple attempts
+      console.log("-----------Image handleChange engaged!--------------");
+      this.setState( { imageForUpload: event.target.files[0] } );
+    }
+  };
+
+  // handles image upload to firebase
+  handleImageUpload() {
+    let image = this.state.imageForUpload;
+    console.log("-------------handleImageUpload engaged!--------------");
+    console.log("--------image:", image);
+
+    // in upload task; using 'storage' from firebase, creates new folder (images) and uses
+    //   the image.name as the base of the URL, then will then PUT (upload) the image (data)
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",                  // a required note
+      snapshot => {},                   // upload progress (used for progress bar)
+      error => { console.log(error) },  // catches any error
+      () => {                           // IF successful,
+        storage                         // storing
+          .ref("images")                // references back to /images on firebase
+          .child(image.name)            // it looks for the name on the image
+          .getDownloadURL()             // it gets the download URL
+          .then(url => {                // THEN... takes the URL it just acquired
+            console.log(url);           // and logs it to the console
+            this.setState( { chapterImage: url } );
+          });
+      }
+    )
+
+  };  //  end of handleImageUpload
+
+
+
+
 
   // **********   DELETE CHAPTER   **********
   deleteThisChapter(event) {
@@ -188,6 +235,8 @@ class ViewMyChapters extends React.Component {
     console.log("this.state.journeyToView:", this.state.journeyToView);
     console.log("this.props.journeyToView?", this.props.journeyToView);
     console.log("These are the chapters:", this.state.allChapters);
+    console.log("This is all of state from MyJourneys:", this.props.state);
+    console.log("This is all props:", this.props);
 
 
     return (
@@ -203,7 +252,14 @@ class ViewMyChapters extends React.Component {
                   <CardTitle tag="h5">{pawpaw.chapterTitle}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted" >{pawpaw.chapterShortDesc}</CardSubtitle>
                   <CardText>{pawpaw.chapterDate.slice(0,9)}</CardText>
-                  <CardText>{pawpaw.chapterImage}</CardText>
+                  <div className="chapterImageContainer">
+                    <img  className="chapterImage"
+                          src={pawpaw.chapterImage}
+                          alt="user upload image for chapter"
+                          >
+                          
+                          </img>
+                  </div>
                   <CardText>{pawpaw.chapterStory}</CardText>
                   <CardText>{pawpaw.chapterVideo}</CardText>
 
@@ -295,14 +351,11 @@ class ViewMyChapters extends React.Component {
                 <Input  className="Input"
                         id="chapterImage"
                         name="chapterImage"
-                        type="text"
-                        placeholder="An image uploaded for this chapter."
-                        value={this.state.chapterImage}
-                        onChange={ (event) => this.setState (
-                            {chapterImage: event.target.value}
-                          )
-                        }
+                        type="file"
+                        onChange={ this.handleChange}
                 />
+                <Button onClick={this.handleImageUpload}>Upload Image</Button>
+
               </FormGroup>
 
               <FormGroup>
@@ -311,8 +364,7 @@ class ViewMyChapters extends React.Component {
                         id="chapterVideo"
                         name="chapterVideo"
                         type="text"
-                        placeholder="Video Not Currently Supported - But feel free use it for URL for storage
-                        ."
+                        placeholder="Video Not Currently Supported - But feel free use it for URL for storage."
                         value={this.state.chapterVideo}
                         onChange={ (event) => this.setState (
                             {chapterVideo: event.target.value}
@@ -341,3 +393,22 @@ class ViewMyChapters extends React.Component {
 };  //  end of Auth class
 
 export default ViewMyChapters;
+
+
+
+
+// ************   OLD CODE STORAGE   ****************
+
+// Original image input field
+{/* <Input  className="Input"
+                        id="chapterImage"
+                        name="chapterImage"
+                        type="file"
+                        placeholder="An image uploaded for this chapter."
+                        value={this.state.chapterImage}
+                        onChange={ (event) => this.setState (
+                            {chapterImage: event.target.value}
+                          )
+                        }
+                />
+                 */}

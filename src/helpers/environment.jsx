@@ -4,7 +4,7 @@ switch (window.location.hostname) {
     case 'localhost' || "127.0.0.1":
         APIURL = "http://localhost:3000";
         break;
-//    case 'immrama.herokuapp.com':                                NOBODY SEEMS TO KNOW WHERE THIS COMES FROM (not same APIURL in module)
+//    case 'immrama.herokuapp.com':          NOBODY SEEMS TO KNOW WHERE THIS COMES FROM (not same APIURL in module)
     default:
         APIURL = "https://immramaserver.herokuapp.com";
 }

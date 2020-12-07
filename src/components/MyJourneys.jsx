@@ -257,6 +257,8 @@ class ViewMyJourneys extends React.Component {
     let username = journeyData.JourneyUsername;
     let startDate = journeyData.journeyStartDate.slice(0,9);
     let endDate = journeyData.journeyEndDate;
+
+    console.log("collectDataForMyJourneys: id for My Chapters", id);
     
     this.setState( {journeyIdForMyJourneys: id } );
     this.setState( {journeyTitleForMyJourneys: title } );
@@ -298,8 +300,7 @@ class ViewMyJourneys extends React.Component {
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
     console.log("Journey data to send to My Chapters")
-    console.log(this.state.journeyData);
-    console.log(this.state.journeyIdForMyJourneys);
+    console.log("******", this.state.journeyIdForMyJourneys);
     console.log(this.state.journeyTitleForMyJourneys);
     console.log(this.state.journeyUsernameForMyJourneys);
     console.log(this.state.journeyStartDateForMyJourneys);
@@ -311,6 +312,11 @@ class ViewMyJourneys extends React.Component {
     console.log("Journey Start state update:", this.state.journeyStartDateToUpdate);
     console.log("Journey End state update:", this.state.journeyEndDateToUpdate);
     console.log("Journey Desc state update:", this.state.journeyJourneyDescToUpdate);
+
+
+
+
+
 
     return (
       <div>
@@ -518,7 +524,8 @@ class ViewMyJourneys extends React.Component {
                 userIsLoggedIn={this.props.userIsLoggedIn}
                 username={this.props.username}
                 userIsAdmin={this.props.userIsAdmin}
-                journeyToView={this.state.journeyToView}
+                journeyToView={this.state.journeyIdForMyJourneys}
+                entiretyOfState={this.state}
               />
             </Route>
           </Switch>
