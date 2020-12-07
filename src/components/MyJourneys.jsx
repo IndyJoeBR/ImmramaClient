@@ -22,7 +22,8 @@ class ViewMyJourneys extends React.Component {
     this.forceRender = this.forceRender.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.saveJourneyUpdate = this.saveJourneyUpdate.bind(this);
-    this.collectDataForMyJourneys = this.collectDataForMyJourneys.bind(this);
+    this.collectDataForMyChapters = this.collectDataForMyChapters.bind(this);
+    this.turnOFFMyChapters = this.turnOFFMyChapters.bind(this);
 
 
     this.state = {
@@ -40,11 +41,11 @@ class ViewMyJourneys extends React.Component {
       updatedJourneyStartDate: null,               //
       updatedJourneyEndDate: '',                   //
       updatedJourneyDesc: '',                      // - not currently used -
-      journeyUsernameForMyJourneys: '',       // Journey data to send to My Chapters
-      journeyTitleForMyJourneys: '',              //  
-      journeyIdForMyJourneys: '',                 //
-      journeyStartDateForMyJourneys: '',          //  
-      journeyEndDateForMyJourneys: '',            //
+      journeyUsernameForMyChapters: '',       // Journey data to send to My Chapters
+      journeyTitleForMyChapters: '',              //  
+      journeyIdForMyChapters: '',                 //
+      journeyStartDateForMyChapters: '',          //  
+      journeyEndDateForMyChapters: '',            //
       userJourneys: []                        // for the cards .map method
     };
 
@@ -234,9 +235,6 @@ class ViewMyJourneys extends React.Component {
     this.setState( { updatedJourneyEndDate: '' } );
     this.setState( { updatedJourneyDesc: '' } );
 
-
-
-
     // TODO .then( () => this.toggleModal() );
     //this.toggleModal(); // toggles modal open
     console.log("The value of modal toggle is: ", this.state.modalClosed);
@@ -249,8 +247,10 @@ class ViewMyJourneys extends React.Component {
 
 
   //     **********  DATA TO PASS TO VIEW JOURNEY'S CHAPTERS  **********
-  collectDataForMyJourneys(journeyData) {
+  collectDataForMyChapters(journeyData) {
     console.log("Attaching journey data to state variables for My Chapters");
+
+    this.setState( {switchMyChaptersOnOff: true } );
 
     let id = journeyData.id;
     let title = journeyData.journeyTitle;
@@ -258,15 +258,20 @@ class ViewMyJourneys extends React.Component {
     let startDate = journeyData.journeyStartDate.slice(0,9);
     let endDate = journeyData.journeyEndDate;
 
-    console.log("collectDataForMyJourneys: id for My Chapters", id);
+    console.log("collectDataForMyChapters: id for My Chapters", id);
     
-    this.setState( {journeyIdForMyJourneys: id } );
-    this.setState( {journeyTitleForMyJourneys: title } );
-    this.setState( {journeyUsernameForMyJourneys: username } );
-    this.setState( {journeyStartDateForMyJourneys: startDate } );
-    this.setState( {journeyEndDateForMyJourneys: endDate } );
-  } //  end of collectDataForMyJourneys
+    this.setState( {journeyIdForMyChapters: id } );
+    this.setState( {journeyTitleForMyChapters: title } );
+    this.setState( {journeyUsernameForMyChapters: username } );
+    this.setState( {journeyStartDateForMyChapters: startDate } );
+    this.setState( {journeyEndDateForMyChapters: endDate } );
+  } //  end of collectDataForMyChapters
 
+
+  // **** MyChapters OFF Switch to pass to MyChapters
+  turnOFFMyChapters() {
+    this.setState( {switchMyChaptersOnOff: false } );
+  };
 
 
 
@@ -300,25 +305,27 @@ class ViewMyJourneys extends React.Component {
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin)
 
     console.log("Journey data to send to My Chapters")
-    console.log("******", this.state.journeyIdForMyJourneys);
-    console.log(this.state.journeyTitleForMyJourneys);
-    console.log(this.state.journeyUsernameForMyJourneys);
-    console.log(this.state.journeyStartDateForMyJourneys);
-    console.log(this.state.journeyEndDateForMyJourneys);
-
-    console.log("Journey data from the modal to update FINALLY UPDATED!!!:")
-    console.log("Journey ID state update:", this.state.journeyIdToUpdate);
-    console.log("Journey Title state update:", this.state.journeyTitleToUpdate);
-    console.log("Journey Start state update:", this.state.journeyStartDateToUpdate);
-    console.log("Journey End state update:", this.state.journeyEndDateToUpdate);
-    console.log("Journey Desc state update:", this.state.journeyJourneyDescToUpdate);
+    console.log("******", this.state.journeyIdForMyChapters);
+    console.log(this.state.journeyTitleForMyChapters);
+    console.log(this.state.journeyUsernameForMyChapters);
+    console.log(this.state.journeyStartDateForMyChapters);
+    console.log(this.state.journeyEndDateForMyChapters);
 
 
-
-
-
-
-    return (
+    return this.state.switchMyChaptersOnOff ?
+    
+    <ViewMyChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+                journeyToViewId={this.state.journeyIdForMyChapters}
+                journeyToViewTitle={this.state.journeyTitleForMyChapters}
+                journeyToViewUsername={this.state.journeyUsernameForMyChapters}
+                journeyToViewStart={this.state.journeyStartDateForMyChapters}
+                journeyToViewEnd={this.state.journeyEndDateForMyChapters}
+                turnOFFMyChapters={this.turnOFFMyChapters}
+              /> :
+    (
       <div>
 
         <div> 
@@ -334,11 +341,8 @@ class ViewMyJourneys extends React.Component {
 
                     <Button color="info" size="sm"
                             value={potato.id}
-                            onClick={() => this.collectDataForMyJourneys(potato)}
-                    >
-                      <Link to="/ViewMyChapters">
-                          View Chapters
-                      </Link>
+                            onClick={() => this.collectDataForMyChapters(potato)}
+                    > View Chapters
                     </Button>
 
                     <Button color="warning" size="sm"
@@ -518,21 +522,6 @@ class ViewMyJourneys extends React.Component {
         </div>
 
 
-        <Switch>
-            <Route exact path="/ViewMyChapters">
-              <ViewMyChapters 
-                userIsLoggedIn={this.props.userIsLoggedIn}
-                username={this.props.username}
-                userIsAdmin={this.props.userIsAdmin}
-                journeyToView={this.state.journeyIdForMyJourneys}
-                entiretyOfState={this.state}
-              />
-            </Route>
-          </Switch>
-
-
-
-
       </div>
 
     );  //  end of return
@@ -559,4 +548,32 @@ export default ViewMyJourneys;
       </Card>
     </div>
   )}
+*/
+
+/*
+
+                      <Link to={{
+                        pathname: "/ViewMyChapters",
+                        myChapterProps: {
+                          viewChapterId: potato.id,
+                          viewChapterTitle: potato.journeyTitle,
+                          viewChapterUserName: potato.JourneyUsername
+                        }
+                      }}>
+                          View Chapters
+                      </Link>
+*/
+
+/*
+        <Switch>
+            <Route exact path="/ViewMyChapters">
+              <ViewMyChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+                journeyToView={this.state.journeyIdForMyChapters}
+                entiretyOfState={this.state}
+              />
+            </Route>
+          </Switch>
 */

@@ -15,8 +15,13 @@ class ViewChapters extends React.Component {
 
     // TODO - also get the Journey Title & username for the headline
     this.state = {
-      journeyToView: 34,      // hard coded for functionality
+      journeyToView: '',
+      journeyToViewTitle: '',
+      journeyToViewUsername: '',
+      journeyToViewStart: '',
+      journeyToViewEnd: '',
       deleteBtnStyle: false,
+      switchViewChaptersOnOff: false,  // Used to open/close ViewChapters,
       allChapters: []
     };
 
@@ -24,8 +29,16 @@ class ViewChapters extends React.Component {
 
   // fetches all Chapters when page opens
   componentDidMount() {
-    console.log("View Chapters mounted.")
-    this.autoFetchJourneysChapters(this.state.journeyToView);
+    console.log("___ ViewChapters mounted ___")
+
+    this.setState( { journeyToView : this.props.journeyToViewId });
+    this.setState( { journeyToViewTitle : this.props.journeyToViewTitle });
+    this.setState( { journeyToViewUsername : this.props.journeyToViewUsername });
+    this.setState( { journeyToViewStart : this.props.journeyToViewStart });
+    this.setState( { journeyToViewEnd : this.props.journeyToViewEnd });
+
+
+    this.autoFetchJourneysChapters(this.props.journeyToViewId);
   };
 
 
@@ -88,8 +101,13 @@ class ViewChapters extends React.Component {
     return (
       <div>
 
-        <h2>Journey Title Here</h2>
-        <h4>(Journey Author Here)</h4>
+<h2>{this.state.journeyToViewTitle}</h2>
+        <h4> {this.state.journeyToViewUsername} </h4>
+        <h5>( {this.state.journeyToViewStart} to {this.state.journeyToViewEnd} )</h5>
+        <Button color="warning" size="sm"
+                onClick={ () => this.props.turnOFFViewChapters() }>
+                Return to My Journeys
+        </Button>
 
           { this.state.allChapters.map ( (pawpaw) =>
             <div>
@@ -98,7 +116,16 @@ class ViewChapters extends React.Component {
                   <CardTitle tag="h5">{pawpaw.chapterTitle}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted" >{pawpaw.chapterShortDesc}</CardSubtitle>
                   <CardText>{pawpaw.chapterDate.slice(0,9)}</CardText>
-                  <CardText>{pawpaw.chapterImage}</CardText>
+                  
+                  <div className="chapterImageContainer">
+                    <img  className="chapterImage"
+                          src={pawpaw.chapterImage}
+                          alt="user upload image for chapter"
+                          >
+                          
+                          </img>
+                  </div>
+
                   <CardText>{pawpaw.chapterStory}</CardText>
                   <CardText>{pawpaw.chapterVideo}</CardText>
 
@@ -112,6 +139,11 @@ class ViewChapters extends React.Component {
             </div>
           )}
 
+
+        <Button color="warning" size="sm"
+                onClick={ () => this.props.turnOFFViewChapters() }>
+                Return to My Journeys
+        </Button>
 
 
       </div>

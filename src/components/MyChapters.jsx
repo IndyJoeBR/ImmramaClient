@@ -20,11 +20,16 @@ class ViewMyChapters extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
+    
 
   // **********>>>>>   FIX journeyToView   <<<<<******************  
   // TODO - also get the Journey Title & username for the headline
     this.state = {
-      journeyToView: 34,      // hard coded for functionality 34
+      journeyToView: '',
+      journeyToViewTitle: '',
+      journeyToViewUsername: '',
+      journeyToViewStart: '',
+      journeyToViewEnd: '',
       deleteBtnStyle: false,
       modalClosed: false,
       allChapters: [],
@@ -35,7 +40,8 @@ class ViewMyChapters extends React.Component {
       imageForUpload: null,         //    for firebase upload
       chapterImage: '',             //    firebase url
       videoForUpload: null,         //    for firebase upload
-      chapterVideo: ''              //    firebase url
+      chapterVideo: '',             //    firebase url
+      switchMyChaptersOnOff: false  // Used to open/close MyChapters
     };
 
 
@@ -43,11 +49,20 @@ class ViewMyChapters extends React.Component {
 
   //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****
   componentDidMount() {
-    console.log("View Journey's Chapters.");
+    console.log("___ MyChapters Mounted ___");
+    console.log("userIsLoggedIn:", this.props.userIsLoggedIn);
+    console.log("username:", this.props.username);
+    console.log("userIsAdmin:", this.props.userIsAdmin);
     console.log("This is the journeyToView:", this.state.journeyToView);
-    this.autoFetchJourneysChapters(this.state.journeyToView);
-    console.log("This is journeyToView props: ", this.props.journeyToView);
-    console.log("This is all of state from MyJourneys:", this.props.state);
+    console.log("This is journeyToView props: ", this.props.journeyToViewId);
+
+    this.setState( { journeyToView : this.props.journeyToViewId });
+    this.setState( { journeyToViewTitle : this.props.journeyToViewTitle });
+    this.setState( { journeyToViewUsername : this.props.journeyToViewUsername });
+    this.setState( { journeyToViewStart : this.props.journeyToViewStart });
+    this.setState( { journeyToViewEnd : this.props.journeyToViewEnd });
+    
+    this.autoFetchJourneysChapters(this.props.journeyToViewId);
   };
 
     // **********   FORCE RE-RENDER   **********
@@ -242,8 +257,13 @@ class ViewMyChapters extends React.Component {
     return (
       <div>
 
-        <h2>Journey Title Here</h2>
-        <h4>( {this.props.username} )</h4>
+        <h2>{this.state.journeyToViewTitle}</h2>
+        <h4> {this.state.journeyToViewUsername} </h4>
+        <h5>( {this.state.journeyToViewStart} to {this.state.journeyToViewEnd} )</h5>
+        <Button color="warning" size="sm"
+                onClick={ () => this.props.turnOFFMyChapters() }>
+                Return to My Journeys
+        </Button>
 
           { this.state.allChapters.map ( (pawpaw) =>
             <div>
@@ -382,6 +402,10 @@ class ViewMyChapters extends React.Component {
 
           </div>
 
+        <Button color="warning" size="sm"
+                onClick={ () => this.props.turnOFFMyChapters() }>
+                Return to My Journeys
+        </Button>
 
 
 

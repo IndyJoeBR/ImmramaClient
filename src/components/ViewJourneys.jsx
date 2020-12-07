@@ -17,11 +17,18 @@ class ViewJourneys extends React.Component {
       this.autoFetchAllJourneys = this.autoFetchAllJourneys.bind(this);
       this.deleteThisJourney = this.deleteThisJourney.bind(this);
       this.forceRender = this.forceRender.bind(this);
-      this.readChapters = this.readChapters.bind(this);
+      this.collectDataForViewChapters = this.collectDataForViewChapters.bind(this);
+      this.turnOFFViewChapters = this.turnOFFViewChapters.bind(this);
+
 
     this.state = {
       deleteBtnStyle: false,
       journeyToView: 9,     // FIX THIS - SHOULD BE SET from potato.id
+      journeyIdForViewChapters: '',           // Journey data to send to My Chapters
+      journeyTitleForViewChapters: '',          //  
+      journeyUsernameForViewChapters: '',       // 
+      journeyStartDateForViewChapters: '',      //  
+      journeyEndDateForViewChapters: '',        //
       allJourneys: []
     };
 
@@ -57,7 +64,45 @@ class ViewJourneys extends React.Component {
   };  //  end of autoFetch for all journeys
 
 
+
+
+
   
+
+//     **********  DATA TO PASS TO VIEW CHAPTERS  **********
+collectDataForViewChapters(journeyData) {
+  console.log("Attaching journey data to state variables for My Chapters");
+
+  this.setState( {switchViewChaptersOnOff: true } );
+
+  let id = journeyData.id;
+  let title = journeyData.journeyTitle;
+  let username = journeyData.JourneyUsername;
+  let startDate = journeyData.journeyStartDate.slice(0,9);
+  let endDate = journeyData.journeyEndDate;
+
+  console.log("collectDataForViewChapters: id for My Chapters", id);
+  
+  this.setState( {journeyIdForViewChapters: id } );
+  this.setState( {journeyTitleForViewChapters: title } );
+  this.setState( {journeyUsernameForViewChapters: username } );
+  this.setState( {journeyStartDateForViewChapters: startDate } );
+  this.setState( {journeyEndDateForViewChapters: endDate } );
+} //  end of collectDataForViewChapters
+
+
+// **** MyChapters OFF Switch to pass to MyChapters
+turnOFFViewChapters() {
+  this.setState( {switchViewChaptersOnOff: false } );
+};
+
+
+
+
+
+
+
+
 
 //  BROKEN... need to pass journeyToView as PROPS
   // **********   READ JOURNEY'S CHAPTERS   **********
@@ -66,6 +111,17 @@ class ViewJourneys extends React.Component {
   } //  end of readChapters
 
 
+
+
+
+
+
+
+
+
+
+
+  
 
   // **********   DELETE JOURNEY   **********
   // ONLY available if userIsAdmin = true
@@ -95,8 +151,31 @@ class ViewJourneys extends React.Component {
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
     console.log("this.state.journeyToView:", this.state.journeyToView);
 
+    console.log("Journey data to send to My Chapters")
+    console.log(this.state.journeyIdForViewChapters);
+    console.log(this.state.journeyTitleForViewChapters);
+    console.log(this.state.journeyUsernameForViewChapters);
+    console.log(this.state.journeyStartDateForViewChapters);
+    console.log(this.state.journeyEndDateForViewChapters);
 
-    return (
+
+    return this.state.switchViewChaptersOnOff ?
+    
+    <ViewChapters 
+                userIsLoggedIn={this.props.userIsLoggedIn}
+                username={this.props.username}
+                userIsAdmin={this.props.userIsAdmin}
+
+                journeyToViewId={this.state.journeyIdForViewChapters}
+                journeyToViewTitle={this.state.journeyTitleForViewChapters}
+                journeyToViewUsername={this.state.journeyUsernameForViewChapters}
+                journeyToViewStart={this.state.journeyStartDateForViewChapters}
+                journeyToViewEnd={this.state.journeyEndDateForViewChapters}
+                turnOFFViewChapters={this.turnOFFViewChapters}
+              /> :
+
+    
+    (
       <div>
           { this.state.allJourneys.map ( (potato) =>
             <div>
@@ -109,13 +188,10 @@ class ViewJourneys extends React.Component {
                   <CardText>{potato.journeyDesc}</CardText>
 
                   <Button color="info" size="sm"
-                          value={potato.id}
-                          onClick={() => this.setState( { journeyToView: potato.id } )}
-                  >
-                    <Link to="/ViewChapters">
-                          Read Chapters
-                    </Link>
-                  </Button>
+                            value={potato.id}
+                            onClick={() => this.collectDataForViewChapters(potato)}
+                    > View Chapters
+                    </Button>
 
                   {
                     this.props.userIsAdmin ?
@@ -128,7 +204,18 @@ class ViewJourneys extends React.Component {
           )}
 
 
+      </div>
 
+    );  //  end of return
+  };  //  end of render
+};  //  end of ViewJourneys class
+
+export default ViewJourneys;
+
+
+
+//  Original routing switch for ViewChapters
+/*
           <Switch>
             <Route exact path="/ViewChapters">
               <ViewChapters 
@@ -139,19 +226,4 @@ class ViewJourneys extends React.Component {
               />
             </Route>
           </Switch>
-
-
-
-
-
-
-
-
-
-      </div>
-
-    );  //  end of return
-  };  //  end of render
-};  //  end of ViewJourneys class
-
-export default ViewJourneys;
+*/
