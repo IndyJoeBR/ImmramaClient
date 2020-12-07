@@ -27,26 +27,26 @@ class ViewMyJourneys extends React.Component {
 
 
     this.state = {
-      journeyTitle: '',                       // Journey data for CREATE
+      journeyTitle: '',                 // Journey data for CREATE
       journeyStartDate: null,                     //
       journeyEndDate: '',                         //
       journeyDesc: '',                            //
-      journeyIdToUpdate: '',                  // Journey data to display for update
+      journeyIdToUpdate: '',            // Journey data to display for update
       journeyTitleToUpdate: '',                   //
       journeyStartDateToUpdate: '',               //
       journeyEndDateToUpdate: '',                 //
       journeyJourneyDescToUpdate: '',             //
-      modalClosed: false,                     // open/close edit journey modal
-      updatedJourneyTitle: '',                 // Journey data for use in updating in modal
+      modalClosed: false,               // open/close edit journey modal
+      updatedJourneyTitle: '',          // Journey data for use in updating in modal
       updatedJourneyStartDate: null,               //
       updatedJourneyEndDate: '',                   //
       updatedJourneyDesc: '',                      // - not currently used -
-      journeyUsernameForMyChapters: '',       // Journey data to send to My Chapters
+      journeyUsernameForMyChapters: '', // Journey data to send to My Chapters
       journeyTitleForMyChapters: '',              //  
       journeyIdForMyChapters: '',                 //
       journeyStartDateForMyChapters: '',          //  
       journeyEndDateForMyChapters: '',            //
-      userJourneys: []                        // for the cards .map method
+      userJourneys: []                  // for the cards .map method
     };
 
   };    //  end of constructor
@@ -118,8 +118,6 @@ class ViewMyJourneys extends React.Component {
     this.setState( { journeyStartDate: '' } );
     this.setState( { journeyEndDate: '' } );
     this.setState( { journeyDesc: '' } );
-
-
 
   };  //  end of createJourneySubmit
 
@@ -435,9 +433,14 @@ class ViewMyJourneys extends React.Component {
 
         <div>
           <Modal isOpen={this.state.modalClosed} toggle={this.state.toggleModal} className="editJourneyModal">
-            <ModalHeader toggle={this.toggleModal}>Edit Journey</ModalHeader>
+            <ModalHeader toggle={this.toggleModal}>
+              Edit Journey
+            </ModalHeader>
+
             <ModalBody>
-              <Form className="editJourneyForm" onSubmit={this.saveJourneyUpdate} type="submit">
+              <Form className="editJourneyForm"
+                    onSubmit={this.saveJourneyUpdate}
+                    type="submit">
                 
                 <FormGroup>
                   <Label  className="modalLabel"
@@ -452,8 +455,7 @@ class ViewMyJourneys extends React.Component {
                           value={this.state.updatedJourneyTitle}
                           onChange={ (event) => this.setState (
                               {updatedJourneyTitle: event.target.value}
-                            )
-                          }
+                            )}
                   />
                 </FormGroup>
 
@@ -470,8 +472,7 @@ class ViewMyJourneys extends React.Component {
                           value={this.state.updatedJourneyStartDate}
                           onChange={ (event) => this.setState (
                               {updatedJourneyStartDate: event.target.value}
-                            )
-                          }
+                          )}
                   />
                 </FormGroup>
 

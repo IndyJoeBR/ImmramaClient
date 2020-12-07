@@ -37,3 +37,14 @@
   width: 300px;
   height: auto;
 }
+
+.chapterImageForEditing {
+  width: 150px;
+  height: auto;
+}
+
+.editChapterImageContainer > img:hover {
+  width: 33%;
+  height: auto;
+  transition: width 1s;
+}

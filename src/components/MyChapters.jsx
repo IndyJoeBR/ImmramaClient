@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Form, Input, Label, FormGroup,
+import { Button, Form, Input, Label, FormGroup,
   Card, CardTitle, CardSubtitle, CardText, CardBody, 
   Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import APIURL from "../helpers/environment";
@@ -16,14 +16,15 @@ class ViewMyChapters extends React.Component {
     this.autoFetchJourneysChapters = this.autoFetchJourneysChapters.bind(this);
     this.deleteThisChapter = this.deleteThisChapter.bind(this);
     this.createChapterSubmit = this.createChapterSubmit.bind(this);
-    this.editChapterModal = this.editChapterModal.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
+
+    this.editChapterModal = this.editChapterModal.bind(this);
+    this.toggleChapterModal = this.toggleChapterModal.bind(this);
+    this.saveChapterUpdate = this.saveChapterUpdate.bind(this);
     
 
   // **********>>>>>   FIX journeyToView   <<<<<******************  
-  // TODO - also get the Journey Title & username for the headline
     this.state = {
       journeyToView: '',
       journeyToViewTitle: '',
@@ -31,8 +32,8 @@ class ViewMyChapters extends React.Component {
       journeyToViewStart: '',
       journeyToViewEnd: '',
       deleteBtnStyle: false,
-      modalClosed: false,
       allChapters: [],
+
       chapterTitle: '',             // for creating a new chapter
       chapterDate: '',              //
       chapterShortDesc: '',         //
@@ -40,11 +41,28 @@ class ViewMyChapters extends React.Component {
       imageForUpload: null,         //    for firebase upload
       chapterImage: '',             //    firebase url
       videoForUpload: null,         //    for firebase upload
-      chapterVideo: '',             //    firebase url
-      switchMyChaptersOnOff: false  // Used to open/close MyChapters
+      chapterVideo: '',             //    firebase url * not currently used * 
+      switchMyChaptersOnOff: false, // Used to open/close MyChapters
+
+      chapterIdToUpdate: '',        // Chapter data to display for update
+      chapterTitleToUpdate: '',         //
+      chapterDateToUpdate: '',          //
+      chapterStoryToUpdate: '',         //
+      chapterShortDescToUpdate: '',     //
+      chapterImageToUpdate: '',         //
+      chapterVideoToUpdate: '',         //
+      // journeyId is taken from this.state.journeyToView
+      // userId is taken from session validation
+      chapterModalIsOpen: false,    // open/close edit chapter modal
+      updatedChapterTitle: '',      // Chapter data for use in updating in modal
+      updatedChapterDate: null,         //
+      updatedChapterStory: '',          //
+      updatedChapterShortDesc: '',      //           
+      updatedChapterImage: null,        //
+      updatedChapterVideo: ''           //    * not currently used *
+
+
     };
-
-
   } //  end of constructor
 
   //  *****     ON MOUNT - AUTO DISPLAYS USER'S CARDS      *****
@@ -135,51 +153,138 @@ class ViewMyChapters extends React.Component {
   };  //  end of createChapterSubmit
 
 
+  
+
+
+
+
+
+
+
+
+
   // **********  OPEN EDIT CHAPTER MODAL  **********
-  editChapterModal(data) {
-    console.log("Updating user's journey");
+  // Extracts current values for a Chapter's card and puts
+  // them in a state variable to display in the edit modal
+  // as a reference for the user of the current value
+  editChapterModal(pawpawData) {
+    console.log("___editChapterModal: extract current values to display in modal.___")
 
-    // let editDataJourneyID = data.id;
-    // let editDataJourneyTitle = data.journeyTitle;
-    // let editDataJourneyStartDate = data.journeyStartDate;
-    // let editDataJourneyEndDate = data.journeyEndDate;
-    // let editDataJourneyDesc = data.journeyDesc;
-    
-    // console.log(data);
-    // console.log(editDataJourneyID);
-    // console.log(editDataJourneyTitle);
-    // console.log(editDataJourneyStartDate);
-    // console.log(editDataJourneyEndDate);
-    // console.log(editDataJourneyDesc);
+    //          DELETE THESE ONCE WORKING
+    console.log("Chapter ID to update:", pawpawData.id);
+    console.log("Chapter Title to update:", pawpawData.chapterTitle);
+    console.log("Chapter Date to update:", pawpawData.chapterDate);
+    console.log("Chapter Story to update:", pawpawData.chapterStory);
+    console.log("Chapter ShortDesc to update:", pawpawData.chapterShortDesc);
+    console.log("Chapter Image to update:", pawpawData.chapterImage);
+    console.log("Chapter Video to update:", pawpawData.chapterVideo);
+    console.log("Chapter journeyId to update:", pawpawData.journeyId);
+    console.log("Chapter userId to update:", pawpawData.userId);
+    //
 
-    // this.setState( {journeyIdToUpdate: editDataJourneyID} );
-    // this.setState( {journeyTitleToUpdate: editDataJourneyTitle} );
-    // this.setState( {journeyStartDateToUpdate: editDataJourneyStartDate} );
-    // this.setState( {journeyEndDateToUpdate: editDataJourneyEndDate} );
-    // this.setState( {journeyJourneyDescToUpdate: editDataJourneyDesc} );
+    this.setState( { chapterIdToUpdate : pawpawData.id } );
+    this.setState( { chapterTitleToUpdate : pawpawData.chapterTitle } );
+    this.setState( { chapterDateToUpdate : pawpawData.chapterDate } );
+    this.setState( { chapterStoryToUpdate : pawpawData.chapterStory } );
+    this.setState( { chapterShortDescToUpdate : pawpawData.chapterShortDesc } );
+    this.setState( { chapterImageToUpdate : pawpawData.chapterImage } );
+    this.setState( { chapterVideoToUpdate : pawpawData.chapterVideo } );
 
-    // console.log("This is in the object to use for data to update:")
-    // console.log("This is updateJourneyDate.journeyIdToUpdate:", this.state.journeyIdToUpdate);
-    // console.log("This is updateJourneyData.journeyTitleToUpdate:", this.state.journeyTitleToUpdate);
-    // console.log("This is updateJourneyData.journeyStartDateToUpdate:", this.state.journeyStartDateToUpdate);
-    // console.log("This is updateJourneyData.journeyEndDateToUpdate:", this.state.journeyEndDateToUpdate);
-    // console.log("This is updateJourneyData.journeyJourneyDescToUpdate:", this.state.journeyJourneyDescToUpdate);
+    //          DELETE THESE ONCE WORKING
+    console.log("This is the chapter data for the edit modal:  NO SHOW");
+    console.log("Chapter ID:", this.state.chapterIdToUpdate);
+    console.log("Chapter Title:", this.state.chapterTitleToUpdate);
+    console.log("Chapter Date:", this.state.chapterDateToUpdate);
+    console.log("Chapter Story:", this.state.chapterStoryToUpdate);
+    console.log("Chapter ShortDesc:", this.state.chapterShortDescToUpdate);
+    console.log("Chapter Image:", this.state.chapterImageToUpdate);
+    console.log("Chapter Video:", this.state.chapterVideoToUpdate);
+    //
 
-
-
-
-    this.toggleModal(); // toggles modal open
-    console.log("The value of modal toggle is: ", this.state.modalClosed);
+    this.toggleChapterModal(); // toggles modal open
+    console.log("The value of modal toggle is: ", this.state.chapterModalIsOpen);
 
   };  //  end of editChapterModal
     
 
-  // **********  TOGGLES modalClosed true/false  **********
-  toggleModal() {
-    console.log("Toggling modal!");
-    this.setState( { modalClosed: (!this.state.modalClosed) } );
-    console.log("Modal is closed?:", this.state.modalClosed);
+// **********  TOGGLES chapterModalIsOpen true/false  **********
+toggleChapterModal() {
+  console.log("Toggling modal!");
+  this.setState( { chapterModalIsOpen: (!this.state.chapterModalIsOpen) } );
+  console.log("Modal is closed?:", this.state.chapterModalIsOpen);
+};
+
+
+
+//      **********  UPDATE USER'S JOURNEYS  **********
+saveChapterUpdate(event) {
+  event.preventDefault();
+  console.log("___ saveChapterUpdate: Updating this chapter___");
+  console.log(" * * * * *   NOT YET FUNCTIONAL  * * * * *");
+
+  let chapterDate = '';  // declare for use in IF
+  let chapterTitle = ''; // declare for use in IF
+  let chapterImage = ''; // declare for use in IF
+  let chapterVideo = ''; // declare for use in IF
+  let localStorageToken = localStorage.getItem('token');
+
+  let chapterId = this.state.updatedChapterVideo;
+  
+  // Chapter Title - (if blank, uses previous)
+  if(this.state.updatedChapterTitle === '') {
+    chapterTitle = this.state.chapterTitleToUpdate;
+  } else {
+    chapterTitle = this.state.updatedChapterTitle;
   };
+
+  // Chapter Date - (if blank, inserts 'tbd')
+  if (this.state.updatedChapterDate === '') {
+    chapterDate = "tbd";
+  } else {
+    chapterDate = this.state.updatedChapterDate;
+  };
+
+  // Chapter Story - edit no currently supported (uses previous)
+  let chapterStory = this.state.chapterStoryToUpdate;
+
+  // Chapter Short Desc - edit no currently supported (uses previous)
+  let chapterShortDesc = this.state.chapterShortDescToUpdate;
+
+  // Chapter Image - uses URL from recently updated image
+  if (this.state.updatedChapterImage === '') {
+    chapterImage = this.state.chapterImageToUpdate;
+  } else {
+    chapterImage = this.state.updatedChapterImage;
+  };
+
+  // Chapter Video - uses previous if left
+  if (this.state.updatedChapterVideo === '') {
+    chapterVideo = this.state.chapterVideoToUpdate;
+  } else {
+    chapterVideo = this.state.updatedChapterVideo;
+  };
+
+  // uses journey ID from page; all chapters on page belong to it
+  let journeyId = this.state.journeyToView;
+
+  console.log("Chapter Update Data:")
+  console.log("Chapter Id:", chapterId);
+  console.log("Chapter Title:", chapterTitle);
+  console.log("Chapter Date:", chapterDate);
+  console.log("Chapter Story:", chapterStory);
+  console.log("Chapter Short Desc:", chapterShortDesc);
+  console.log("Chapter Image URL:", chapterImage);
+  console.log("Chapter Video:", chapterVideo);
+  console.log("Chapter's Journey ID:", journeyId);
+
+
+
+
+
+};  //  end of saveChapterUpdate
+
+
+
 
 
   // handles change in image state for image upload
@@ -214,6 +319,13 @@ class ViewMyChapters extends React.Component {
           });
       }
     )
+
+    // IF modal is open, and image is uploaded, assumes new image
+    // has been uploaded to update the image used in the chapter
+    // and sets value to be used in the update to the chapterImage
+    if (this.state.chapterModalIsOpen) {
+      this.setState( { updatedChapterImage: this.state.chapterImage } );
+    };
 
   };  //  end of handleImageUpload
 
@@ -253,6 +365,15 @@ class ViewMyChapters extends React.Component {
     console.log("This is all of state from MyJourneys:", this.props.state);
     console.log("This is all props:", this.props);
 
+    console.log("This is the chapter data for the edit modal:  IS HERE?");
+    console.log("Chapter ID:", this.state.chapterIdToUpdate);
+    console.log("Chapter Title:", this.state.chapterTitleToUpdate);
+    console.log("Chapter Date:", this.state.chapterDateToUpdate);
+    console.log("Chapter Story:", this.state.chapterStoryToUpdate);
+    console.log("Chapter ShortDesc:", this.state.chapterShortDescToUpdate);
+    console.log("Chapter Image:", this.state.chapterImageToUpdate);
+    console.log("Chapter Video:", this.state.chapterVideoToUpdate);
+
 
     return (
       <div>
@@ -272,20 +393,19 @@ class ViewMyChapters extends React.Component {
                   <CardTitle tag="h5">{pawpaw.chapterTitle}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted" >{pawpaw.chapterShortDesc}</CardSubtitle>
                   <CardText>{pawpaw.chapterDate.slice(0,9)}</CardText>
+                  <CardText>{pawpaw.chapterStory}</CardText>
                   <div className="chapterImageContainer">
                     <img  className="chapterImage"
                           src={pawpaw.chapterImage}
                           alt="user upload image for chapter"
                           >
-                          
                           </img>
                   </div>
-                  <CardText>{pawpaw.chapterStory}</CardText>
                   <CardText>{pawpaw.chapterVideo}</CardText>
 
                   <Button color="warning" size="sm"
                           onClick={() => this.editChapterModal(pawpaw)}
-                  >       Edit Journey
+                  >       Edit Chapter
                   </Button>
 
                   <Button color="danger" size="sm" onClick={this.deleteThisChapter} value={pawpaw.id}>Delete</Button>
@@ -372,7 +492,7 @@ class ViewMyChapters extends React.Component {
                         id="chapterImage"
                         name="chapterImage"
                         type="file"
-                        onChange={ this.handleChange}
+                        onChange={this.handleChange}
                 />
                 <Button onClick={this.handleImageUpload}>Upload Image</Button>
 
@@ -406,6 +526,163 @@ class ViewMyChapters extends React.Component {
                 onClick={ () => this.props.turnOFFMyChapters() }>
                 Return to My Journeys
         </Button>
+
+
+
+
+
+
+        <div className="chapterEditModal">
+          <Modal  className="editChapteryModal"
+                  isOpen={this.state.chapterModalIsOpen}
+                  toggle={this.state.toggleChapterModal}
+          >
+            <ModalHeader toggle={this.toggleChapterModal}>
+              Edit Chapter
+            </ModalHeader>
+
+            <ModalBody>
+            <Form className="editJourneyForm"
+                  onSubmit={this.saveChapterUpdate}
+                  type="submit">
+
+              <FormGroup>
+                <Label  className="modalLabel"
+                        htmlFor="editChapterTitle">
+                        *Chapter Title
+                </Label>
+                <p className="editModalCurrentValue">Current: {this.state.chapterTitleToUpdate}</p>
+                <Input  className="Input"
+                        id="editChapterTitle"
+                        name="editChapterTitle"
+                        type="text"
+                        value={this.state.updatedChapterTitle}
+                        onChange={ (event) => this.setState (
+                          {updatedChapterTitle: event.target.value}
+                        )}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <Label  className="modalLabel"
+                        htmlFor="editChapterDate">
+                        *Chapter Date
+                </Label>
+                <p className="editModalCurrentValue">Current: {this.state.chapterDateToUpdate}</p>
+                <Input  className="Input"
+                          id="editChapterDate"
+                          name="editChapterDate"
+                          type="date"
+                          value={this.state.updatedChapterDate}
+                          onChange={ (event) => this.setState (
+                              {updatedChapterDate: event.target.value}
+                          )}
+                />
+                </FormGroup>
+
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editChapterShortDesc">
+                          Chapter Short Description
+                  </Label>
+                  <p className="editModalCurrentValue">Current: {this.state.chapterShortDescToUpdate}</p>
+                  <textarea rows="2" cols="50"  
+                          className="Input"
+                          id="editChapterShortDesc"
+                          name="editChapterShortDesc"
+                          type="text"
+                          placeholder="Edit Chapter Short Description is not currently available; planned for future implementation."
+                  />
+                </FormGroup>
+
+
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editChapterStory">
+                          Chapter Story
+                  </Label>
+                  <p className="editModalCurrentValue">Current: too long for display</p>
+                  <textarea rows="2" cols="50"  
+                          className="Input"
+                          id="editChapterStor"
+                          name="editChapterStor"
+                          type="text"
+                          placeholder="Edit Chapter Story is not currently available; planned for future implementation."
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editChapterImage">
+                          Chapter Image
+                  </Label>
+                    <div className="editChapterImageContainer">
+                      <img  className="chapterImageForEditing"
+                            src={this.state.chapterImageToUpdate}
+                            alt="previously uploaded image for chapter"
+                            >
+                            </img>
+                    </div>
+                  <Input  className="Input"
+                          id="editChapterImage"
+                          name="editChapterImage"
+                          type="file"
+                          onChange={ this.handleChange}
+                  />
+                  <Button onClick={this.handleImageUpload}>Upload Image</Button>
+                  <p className="updateChapterImageNote">You still need to 'Save Updates' for the image URL to be updated.</p>
+
+                </FormGroup>
+
+
+                <FormGroup>
+                  <Label  className="modalLabel"
+                          htmlFor="editChapterVideo">
+                          Chapter Video
+                  </Label>
+                  <Input  className="Input"
+                        id="editChapterVideo"
+                        name="editChapterVideo"
+                        type="text"
+                        placeholder="Edit Chapter Video is planned for future implementation."
+                  />
+                </FormGroup>
+
+
+
+
+              <Button className="Button" color="primary" type="submit">Save Updates</Button>{' '}
+
+            </Form>
+
+            </ModalBody>
+
+          </Modal>
+
+          <ModalFooter>
+            <p className="modalFooterText">* Fields are required - may not be updated to blank.</p>
+          </ModalFooter>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
