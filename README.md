@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Immrama - What's Your Story
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Its meant to be more than just a travel blog, but this application will make a good one.
 
 ## Available Scripts
 
