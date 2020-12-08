@@ -279,6 +279,33 @@ saveChapterUpdate(event) {
 
 
 
+  fetch(`${APIURL}/chapter/chapterUpdate/${chapterId}`, {
+    method: 'PUT',
+    headers: new Headers( { 'Content-Type': 'application/json',
+                            'Authorization': localStorageToken } ),
+    body: JSON.stringify({ chapter: { 
+    chapterTitle: chapterTitle,
+    chapterDate: chapterDate,
+    chapterShortDesc: chapterShortDesc,
+    chapterStory: chapterStory,
+    chapterImage: chapterImage,
+    chapterVideo: chapterVideo,
+    journeyId: journeyId
+    }}),
+  })
+  .then( (response) => response.json() )
+  .then( (data) => console.log("Updated Chapter:", data) )
+  .then( () => this.toggleChapterModal() )
+  .then( () => this.forceRender() )
+  .catch( (error) => console.log(error) );
+
+
+
+
+
+
+
+
 
 
 };  //  end of saveChapterUpdate
@@ -659,11 +686,13 @@ saveChapterUpdate(event) {
 
             </ModalBody>
 
-          </Modal>
-
-          <ModalFooter>
+            <ModalFooter>
             <p className="modalFooterText">* Fields are required - may not be updated to blank.</p>
           </ModalFooter>
+
+          </Modal>
+
+          
 
         </div>
 
