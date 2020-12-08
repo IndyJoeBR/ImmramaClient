@@ -10,6 +10,15 @@ We are all on a journey and we all have stories.  Won't you share those stories 
 
 What is your immram?
 
+## How to use it
+The operation is analogous to writing a book.
+
+Register and then log into the application.  In 'Journeys' you will find all journeys from all users.  You can then read the individual chapters of those journeys.
+
+To create your own, instead visit 'My Journeys'.  There you can create your own journey.  (Think of it as writing the 'idea' of a book.)  Afterwards you may add chapters to tell the individual stories of your journey.  You can add a picture to assist in your telling.  (In the near future, there will also be a place for videos.)
+
+After creation, you can edit both journey and chapter.
+
 ## Dependencies
 - bootstrap: 4.5.3
 - firebase: 8.1.1
