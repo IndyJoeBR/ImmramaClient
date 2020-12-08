@@ -183,7 +183,7 @@ turnOFFViewChapters() {
                 <CardBody className="journeyCardBody">
                   <CardTitle tag="h5">{potato.journeyTitle}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted" >{potato.JourneyUsername}</CardSubtitle>
-                  <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
+                  <CardText>{potato.journeyStartDate.slice(0,10)}</CardText>
                   <CardText>{potato.journeyEndDate}</CardText>
                   <CardText>{potato.journeyDesc}</CardText>
 

@@ -1,6 +1,6 @@
 .about {
   margin-left: 10vw;
-  margin-top: -50px;
+  margin-top: -20px;
   width: 80vw;
   text-align: left;
 }
@@ -11,6 +11,25 @@
   font-weight: bold;
 }
 
-.aboutHeadlines {
+.aboutSubtitle {
   text-align: center;
+  color: black;
+}
+
+.aboutHeadline {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-weight: bold;
+}
+
+.closingLine {
+  font-weight: bold;
 }

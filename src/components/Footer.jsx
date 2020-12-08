@@ -7,14 +7,14 @@ class Footer extends React.Component {
   render () {
 
     const footerStyles={
-        marginLeft: "37vw"
+        marginLeft: "40vw"
     }
 
     return (
       <div>
 
         <Row>
-          <p className="centerFooter" style={footerStyles} >&nbsp; &copy; 2020 Joseph Benson</p>
+          <h5 className="centerFooter" style={footerStyles} >&nbsp; &copy; 2020 Joseph Benson</h5>
         </Row>
       </div>
 

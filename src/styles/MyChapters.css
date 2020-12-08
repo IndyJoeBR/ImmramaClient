@@ -48,3 +48,15 @@
   height: auto;
   transition: width 1s;
 }
+
+.createChapterFormContainer {
+  margin-top: 5vh;
+  margin-left: 20vw;
+  text-align: center;
+}
+
+.MyChapterTitle {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: -30vw;
+}

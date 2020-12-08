@@ -23,3 +23,12 @@
   justify-content: center;
   margin-bottom: 50px;
 }
+
+.accountHello {
+  font-weight: bold;
+  margin-bottom: -10px;
+}
+
+.myAcc {
+  font-weight: bold;
+}

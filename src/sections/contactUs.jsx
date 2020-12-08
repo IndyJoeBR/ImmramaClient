@@ -13,7 +13,7 @@ class ContactUs extends React.Component {
 
         return (
             <div className="contactForm">
-            <h2> -  Contact Us  -</h2>
+            <h1> -  Contact Us  -</h1>
             <div className="centerMe">
                 <Form id="fs-frm" name="simple-contact-form" acceptCharset="utf-8" action="https://formspree.io/f/xnqovbrl" method="post">
                     <FormGroup id="fs-frm-inputs">

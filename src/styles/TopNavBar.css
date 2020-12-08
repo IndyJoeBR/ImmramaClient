@@ -43,3 +43,47 @@ Link:link Link:visited {
   border-radius: 5px;
   color: black;
 }
+
+.navbarBtn {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+
+
+#btnHome {
+  background-color: indigo;
+}
+
+#btnJourneys {
+  background-color: blueviolet;
+}
+
+#btnMyJourneys {
+  background-color: blue;
+}
+
+#btnAbout {
+  background-color: darkcyan;
+}
+
+#btnContactUs {
+  background-color: cadetblue;
+}
+
+#btnAccount {
+  background-color: mediumseagreen;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  margin-top: 5px;
+
+}

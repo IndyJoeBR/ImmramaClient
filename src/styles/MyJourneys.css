@@ -32,3 +32,14 @@
   font-size: 14px;
   color: red;
 }
+
+.createJourneyFormContainer {
+  margin-left: 20vw;
+  text-align: center;
+}
+
+.MyJourneyTitle {
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: -30vw;
+}

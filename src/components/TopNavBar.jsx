@@ -1,15 +1,7 @@
 import React from 'react';
-import {   Collapse,
-  Button,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem, } from 'reactstrap';
+import {  Collapse, Button, Navbar, NavbarToggler, NavbarBrand, Nav,
+          NavItem, UncontrolledDropdown, DropdownToggle, DropdownMenu,
+          DropdownItem, } from 'reactstrap';
 import { Link, Route, Switch, Redirect } from "react-router-dom";
 import navbarLogo from '../styles/assets/ImmramaLogo.png';
 import '../styles/TopNavBar.css'
@@ -25,14 +17,12 @@ import ChangePasswordModal from "./ChangePasswordModal";
 
 
 class TopNavBar extends React.Component {
-
   constructor (props) {
     super(props)
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.immramaLogout = this.immramaLogout.bind(this);
 
     this.state = { navbarIsOpen: true };
-
   };  //  end of constructor
 
 
@@ -59,6 +49,11 @@ class TopNavBar extends React.Component {
     console.log("this.props.username: ", this.props.username);
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
 
+    const btnStyleHome = {
+      background: "indigo",
+      color: "white"
+    }
+
     return (
       <div>
         <Navbar light expand="md" className="navbarBackground" >
@@ -71,24 +66,29 @@ class TopNavBar extends React.Component {
           <Collapse isOpen={this.state.navbarIsOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <Button color="dark"><Link to="/">Home</Link></Button>{' '}
+                <Link to="/" className="navbarBtn" id="btnHome">Home</Link>
               </NavItem>
+              
               <NavItem>
-                <Button color="primary"><Link to="/ViewJourneys">Journeys</Link></Button>{' '}
+                <Link to="/ViewJourneys" className="navbarBtn" id="btnJourneys">Journeys</Link>
               </NavItem>
+
               <NavItem>
-                <Button color="primary"><Link to="/ViewMyJourneys">My Journeys</Link></Button>{' '}
+                <Link to="/ViewMyJourneys" className="navbarBtn" id="btnMyJourneys">My Journeys</Link>
               </NavItem>
+
               <NavItem>
-                  <Button color="info"><Link to="/Sections/About">About</Link></Button>{' '}
+                  <Link to="/Sections/About" className="navbarBtn" id="btnAbout">About</Link>
               </NavItem>
+
               <NavItem>
-                <Button color="info"><Link to="/Sections/ContactUs">Contact Us</Link></Button>{' '}
+                <Link to="/Sections/ContactUs" className="navbarBtn" id="btnContactUs">Contact Us</Link>
               </NavItem>
+
             </Nav>
             <UncontrolledDropdown inNavbar>
 
-                  <DropdownToggle nav caret className="accountContainer" >
+                  <DropdownToggle nav caret  className="navbarBtn" id="btnAccount">
                     Account
                   </DropdownToggle>
 

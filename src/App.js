@@ -80,8 +80,8 @@ class App extends React.Component {
           </div>
           : 
           <div className="AuthForms">
-            <h3>Welcome to Immrama</h3>
-            <h4>Registration and login</h4>
+            <h1 className="appWelcome">Welcome to Immrama</h1>
+            <h3>Registration and Login</h3>
             <Container className="auth-container">
               <Row>
                 <Col md="6" className="register-col">

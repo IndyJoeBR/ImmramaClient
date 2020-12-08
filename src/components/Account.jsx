@@ -92,19 +92,15 @@ class Account extends React.Component {
     console.log("this.user.isLoggedIn:", this.props.userIsLoggedIn);
     console.log("this.props.username: ", this.props.username);
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
-    //console.log("openPasswordModal: ", this.state.openPasswordModal);
 
-    console.log("this.state.oldPassword", this.state.oldPassword);
-    console.log("this.state.newPassword", this.state.newPassword);
-    console.log("this.state.newPasswordConfirm", this.state.newPasswordConfirm);
 
     return (
       <div>
-          <h2>Hello {this.props.username}!</h2>
+          <h1 className="accountHello">Hello {this.props.username}!</h1>
 
 
           <div className="accountHeader">
-            <h3 className="myAcc">My Account</h3>
+            <h2 className="myAcc">My Account</h2>
           </div>
           <br/>
 

@@ -333,7 +333,7 @@ class ViewMyJourneys extends React.Component {
                 <CardBody className="journeyCardBody">
                     <CardTitle  tag="h5">{potato.journeyTitle}</CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">{potato.JourneyUsername}</CardSubtitle>
-                    <CardText>{potato.journeyStartDate.slice(0,9)}</CardText>
+                    <CardText>{potato.journeyStartDate.slice(0,10)}</CardText>
                     <CardText>{potato.journeyEndDate}</CardText>
                     <CardText>{potato.journeyDesc}</CardText>
 
@@ -361,8 +361,8 @@ class ViewMyJourneys extends React.Component {
 
 
 
-        <div>
-          <h3>Create a new journey here.</h3>
+        <div className="createJourneyFormContainer">
+          <p className="MyJourneyTitle">Create a new journey here.</p>
           <Form className="createJourneyForm" onSubmit={this.createJourneySubmit} type="submit">
             <FormGroup>
               <Label className="Label" htmlFor="journeyTitle">*Journey Title</Label>

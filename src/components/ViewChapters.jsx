@@ -106,7 +106,7 @@ class ViewChapters extends React.Component {
         <h5>( {this.state.journeyToViewStart} to {this.state.journeyToViewEnd} )</h5>
         <Button color="warning" size="sm"
                 onClick={ () => this.props.turnOFFViewChapters() }>
-                Return to My Journeys
+                Return to Journeys
         </Button>
 
           { this.state.allChapters.map ( (pawpaw) =>
@@ -142,7 +142,7 @@ class ViewChapters extends React.Component {
 
         <Button color="warning" size="sm"
                 onClick={ () => this.props.turnOFFViewChapters() }>
-                Return to My Journeys
+                Return to Journeys
         </Button>
 
 
