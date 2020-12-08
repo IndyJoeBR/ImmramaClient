@@ -228,7 +228,7 @@ saveChapterUpdate(event) {
   let chapterVideo = ''; // declare for use in IF
   let localStorageToken = localStorage.getItem('token');
 
-  let chapterId = this.state.updatedChapterVideo;
+  let chapterId = this.state.chapterIdToUpdate;
   
   // Chapter Title - (if blank, uses previous)
   if(this.state.updatedChapterTitle === '') {
@@ -343,16 +343,20 @@ saveChapterUpdate(event) {
           .then(url => {                // THEN... takes the URL it just acquired
             console.log(url);           // and logs it to the console
             this.setState( { chapterImage: url } );
+            if (this.state.chapterModalIsOpen) {
+              this.setState( { updatedChapterImage: this.state.chapterImage } );
+            };
           });
       }
     )
 
-    // IF modal is open, and image is uploaded, assumes new image
+    // IF modal is open, and image is uploaded, .then assumes new image
     // has been uploaded to update the image used in the chapter
     // and sets value to be used in the update to the chapterImage
-    if (this.state.chapterModalIsOpen) {
-      this.setState( { updatedChapterImage: this.state.chapterImage } );
-    };
+    
+    //if (this.state.chapterModalIsOpen) {
+    //  this.setState( { updatedChapterImage: this.state.chapterImage } );
+    //};
 
   };  //  end of handleImageUpload
 
@@ -388,9 +392,8 @@ saveChapterUpdate(event) {
     console.log("this.props.userIsAdmin?", this.props.userIsAdmin);
     console.log("this.state.journeyToView:", this.state.journeyToView);
     console.log("this.props.journeyToView?", this.props.journeyToView);
-    console.log("These are the chapters:", this.state.allChapters);
-    console.log("This is all of state from MyJourneys:", this.props.state);
-    console.log("This is all props:", this.props);
+ 
+
 
     console.log("This is the chapter data for the edit modal:  IS HERE?");
     console.log("Chapter ID:", this.state.chapterIdToUpdate);
@@ -419,7 +422,7 @@ saveChapterUpdate(event) {
                 <CardBody className="chapterCardBody">
                   <CardTitle tag="h5">{pawpaw.chapterTitle}</CardTitle>
                   <CardSubtitle tag="h6" className="mb-2 text-muted" >{pawpaw.chapterShortDesc}</CardSubtitle>
-                  <CardText>{pawpaw.chapterDate.slice(0,9)}</CardText>
+                  <CardText>{pawpaw.chapterDate.slice(0,10)}</CardText>
                   <CardText>{pawpaw.chapterStory}</CardText>
                   <div className="chapterImageContainer">
                     <img  className="chapterImage"
