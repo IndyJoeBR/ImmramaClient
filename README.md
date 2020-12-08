@@ -1,6 +1,52 @@
 # Immrama - What's Your Story
 
-Its meant to be more than just a travel blog, but this application will make a good one.
+Welcome to Immrama, here a user can create an account and then create a journey and fill that journey with chapters of their adventures.  Other users can also access those journeys and read the chapters.  This site is for sharing your story.
+
+While intended at its most basic level as a travel blog, a journey need not be tavel to an exotic local or even a state over.  It could a journey of another kind.  Perhaps you are starting a new job, learning to play and instrument or taking a 3 months coding bootcamp.  Or maybe its two weeks of quarantine and what you are doing with that time.  These are all journeys and every journey has its stories.
+
+An immrama - the singular is 'immram' - is a class of old Irish stories about a hero on a seafaring journey and relates the stories involved in that adventure. 
+
+We are all on a journey and we all have stories.  Won't you share those stories with the rest of us?
+
+What is your immram?
+
+## Dependencies
+- bootstrap: 4.5.3
+- firebase: 8.1.1
+- react: 17.0.1
+- react-dom: 17.0.1
+- react-router-dom: 5.2.0
+- react-scripts: 4.0.1
+- web-vitals: 0.2.4
+
+### Development
+While not developed specifically for Chrome, it was the primary web browser used.
+
+The application was developed for mobile, but a more mobile friendly version - probably for a tablet - is planned for the future.
+
+## To Run: 
+In order to run the app, navigate to the project directory and run:
+
+   client> npm start
+
+The project is currently hardcoded for the Heroku server, but this can be easily changed in public/src/helpers/environment.jsx by commenting out the current APIURL and uncommenting out the current commented code.
+
+## Construction:
+The client is buitl with REACT, Bootstrap, Reactstrap, REACT Router, Javascript and CSS.  It uses a server on Heroku, although images and video are stored on Firebase.
+
+## Acknowledgements
+The author of the video: Uploading Images to Firebase Storage in ReactJS.
+It was particularly cogent and easy to follow.  I can only recommend it.
+[https://www.youtube.com/watch?v=8r1Pb6Ja90o]
+
+### And I would like to thank my many classmates and instructors for the eyes, assistance and encouragment they provided.
+
+
+
+
+
+
+
 
 ## Available Scripts
 
@@ -14,56 +60,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
 

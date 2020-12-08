@@ -61,7 +61,6 @@ class ViewMyChapters extends React.Component {
       updatedChapterImage: null,        //
       updatedChapterVideo: ''           //    * not currently used *
 
-
     };
   } //  end of constructor
 
@@ -151,16 +150,6 @@ class ViewMyChapters extends React.Component {
     .catch( (error) => console.log(error) );
   
   };  //  end of createChapterSubmit
-
-
-  
-
-
-
-
-
-
-
 
 
   // **********  OPEN EDIT CHAPTER MODAL  **********
@@ -300,13 +289,20 @@ saveChapterUpdate(event) {
   .catch( (error) => console.log(error) );
 
 
+  // Clears current and updated fields in modal
+  this.setState( { chapterTitleToUpdate: '' } );
+  this.setState( { chapterDateToUpdate: '' } );
+  this.setState( { chapterStoryToUpdate: '' } );
+  this.setState( { chapterShortDescToUpdate: '' } );
+  this.setState( { chapterImageToUpdate: '' } );
+  this.setState( { chapterVideoToUpdate: '' } );
 
-
-
-
-
-
-
+  this.setState( { updatedChapterTitle: '' } );
+  this.setState( { updatedChapterDate: '' } );
+  this.setState( { updatedChapterStory: '' } );
+  this.setState( { updatedChapterShortDesc: '' } );           
+  this.setState( { updatedChapterImage: '' } );
+  this.setState( { updatedChapterVideo: '' } );
 
 };  //  end of saveChapterUpdate
 
@@ -680,9 +676,6 @@ saveChapterUpdate(event) {
                   />
                 </FormGroup>
 
-
-
-
               <Button className="Button" color="primary" type="submit">Save Updates</Button>{' '}
 
             </Form>
@@ -695,28 +688,8 @@ saveChapterUpdate(event) {
 
           </Modal>
 
-          
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       </div>
 
@@ -733,7 +706,7 @@ export default ViewMyChapters;
 // ************   OLD CODE STORAGE   ****************
 
 // Original image input field
-{/* <Input  className="Input"
+/* <Input  className="Input"
                         id="chapterImage"
                         name="chapterImage"
                         type="file"
@@ -744,4 +717,4 @@ export default ViewMyChapters;
                           )
                         }
                 />
-                 */}
+                 */
